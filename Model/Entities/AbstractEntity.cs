@@ -8,13 +8,16 @@ public class AbstractEntity : IEntity
 
 	private Dictionary<string, int> currentResources;
 
-	public AbstractEntity (World world, List<string> resources)
+	private string name;
+
+	public AbstractEntity (World world, List<string> resources, string name)
 	{
 		this.world = world;
 		this.currentResources = new Dictionary<string, int> ();
 		foreach (var resource in resources) {
 			this.currentResources.Add (resource, 0);
 		}
+		this.name = name;
 	}
 
 	public void changeResourceAmount (string name, int change)

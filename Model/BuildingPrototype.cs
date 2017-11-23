@@ -8,7 +8,7 @@ public class BuildingPrototype
 
 	public Dictionary<string, int> ResourcesRequired { get; private set; }
 
-	public Dictionary<string, int> ResourcesProduced { get; private set; }
+	public Dictionary<string, int> ChangeInResources { get; private set; }
 
 	public static BuildingPrototype createBuildingPrototype (
 		string name, Dictionary<string, int> resourcesRequired, Dictionary<string, int> resourcesProduced)
@@ -16,7 +16,7 @@ public class BuildingPrototype
 		BuildingPrototype proto = new BuildingPrototype {
 			name = name,
 			ResourcesRequired = resourcesRequired,
-			ResourcesProduced = resourcesProduced
+			ChangeInResources = resourcesProduced
 		};
 		return proto;
 	}

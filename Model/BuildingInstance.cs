@@ -18,8 +18,13 @@ public class BuildingInstance
 
 	public void runTick ()
 	{
-		foreach (var resource in this.proto.ResourcesProduced) {
+		foreach (var resource in this.proto.ChangeInResources) {
 			Owner.changeResourceAmount (resource.Key, resource.Value);
 		}
+	}
+
+	public int getChangeInResource (string name)
+	{
+		return this.proto.ChangeInResources [name];
 	}
 }

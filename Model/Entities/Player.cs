@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : AbstractEntity
 {
-	public Player (World world, List<string> resources) : base (world, resources)
+	public Player (World world, List<string> resources) : base (world, resources, "Player")
 	{
 		
 	}

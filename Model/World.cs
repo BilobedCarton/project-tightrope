@@ -12,7 +12,7 @@ public class World
 	private int length;
 
 	private Dictionary<string, BuildingPrototype> buildingPrototypes;
-	private List<string> resources;
+	private Dictionary<string, Resource> resources;
 
 	private Player player;
 	private List<Corporation> corporations;
@@ -28,9 +28,13 @@ public class World
 		this.length = length;
 
 		this.buildingPrototypes = new Dictionary<string, BuildingPrototype> ();
-		this.resources = new List<string> ();
+		this.resources = new Dictionary<string, Resource> ();
 
-		this.player = new Player (this, this.resources);
+		List<string> resourceNames = new List<string> ();
+		foreach (var resourceName in this.resources.Keys) {
+			resourceNames.Add (resourceName);
+		}
+		this.player = new Player (this, resourceNames);
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
 	}
@@ -56,10 +60,35 @@ public class World
 		return true;
 	}
 
+	public int getWorldStockpile (string resourceName)
+	{
+		int stockpile = 0;
+		stockpile += player.getResourceAmount (resourceName);
+		foreach (Corporation c in this.corporations) {
+			stockpile += c.getResourceAmount (resourceName);
+		}
+		foreach (Nation n in this.nations) {
+			stockpile += n.getResourceAmount (resourceName);
+		}
+		return stockpile;
+	}
+
+	public int getNextStockpileChange (string resourceName)
+	{
+		int change = 0;
+		foreach (BuildingInstance b in this.buildings) {
+			change += b.getChangeInResource (resourceName);
+		}
+		return change;
+	}
+
 	public void runTick ()
 	{
 		foreach (var b in buildings) {
 			b.runTick ();
+		}
+		foreach (var r in resources.Values) {
+			r.calculatePrice (this);
 		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Nation : AbstractEntity
 {
-	public Nation (World world, List<string> resources) : base (world, resources)
+	public Nation (World world, List<string> resources, string name) : base (world, resources, name)
 	{
 		
 	}
