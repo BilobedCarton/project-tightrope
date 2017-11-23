@@ -16,9 +16,18 @@ public class BuildingInstance
 		this.Owner = owner;
 	}
 
-	public void runTick ()
+	public void runTick (World world)
 	{
 		foreach (var resource in this.proto.ChangeInResources) {
+			if (Owner.getResourceAmount (resource.Key) < -resource.Value
+			    && Owner.getMoneyBalance () < world.getResourceCost (resource.Key) * (-resource.Value - Owner.getResourceAmount (resource.Key))) {
+				return;
+			}
+		}
+		foreach (var resource in this.proto.ChangeInResources) {
+			if (Owner.getResourceAmount (resource.Key) < -resource.Value) {
+				Owner.purchaseResource (resource.Key, -resource.Value - Owner.getResourceAmount (resource.Key));
+			}
 			Owner.changeResourceAmount (resource.Key, resource.Value);
 		}
 	}

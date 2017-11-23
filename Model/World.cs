@@ -82,10 +82,15 @@ public class World
 		return change;
 	}
 
+	public float getResourceCost (string name)
+	{
+		return this.resources [name].Price;
+	}
+
 	public void runTick ()
 	{
 		foreach (var b in buildings) {
-			b.runTick ();
+			b.runTick (this);
 		}
 		foreach (var r in resources.Values) {
 			r.calculatePrice (this);
