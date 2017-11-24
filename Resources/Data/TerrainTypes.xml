@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<TerrainType>
+	<Terrain id=0>
+		<name>ColdFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>-3</lowestElevation>
+		<highestElevation>5</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>-5</highestTemperature>
+	</Terrain>
+	<Terrain id=1>
+		<name>ColdBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>5</lowestElevation>
+		<highestElevation>12</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>-5</highestTemperature>
+	</Terrain>
+	<Terrain id=2>
+		<name>ColdTall</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>11</lowestElevation>
+		<highestElevation>30</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>-5</highestTemperature>
+	</Terrain>
+	<Terrain id=3>
+		<name>EvenFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>-3</lowestElevation>
+		<highestElevation>5</highestElevation>
+		<lowestTemperature>-5</lowestTemperature>
+		<highestTemperature>15</highestTemperature>
+	</Terrain>
+	<Terrain id=4>
+		<name>EvenBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>5</lowestElevation>
+		<highestElevation>12</highestElevation>
+		<lowestTemperature>-5</lowestTemperature>
+		<highestTemperature>15</highestTemperature>
+	</Terrain>
+	<Terrain id=5>
+		<name>EvenTall</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>11</lowestElevation>
+		<highestElevation>30</highestElevation>
+		<lowestTemperature>-5</lowestTemperature>
+		<highestTemperature>15</highestTemperature>
+	</Terrain>
+	<Terrain id=6>
+		<name>WarmFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>5</lowestElevation>
+		<highestElevation>12</highestElevation>
+		<lowestTemperature>15</lowestTemperature>
+		<highestTemperature>40</highestTemperature>
+	</Terrain>
+	<Terrain id=7>
+		<name>WarmBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>5</lowestElevation>
+		<highestElevation>12</highestElevation>
+		<lowestTemperature>15</lowestTemperature>
+		<highestTemperature>40</highestTemperature>
+	</Terrain>
+	<Terrain id=8>
+		<name>WarmTall</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>11</lowestElevation>
+		<highestElevation>30</highestElevation>
+		<lowestTemperature>15</lowestTemperature>
+		<highestTemperature>40</highestTemperature>
+	</Terrain>
+</TerrainType>
+

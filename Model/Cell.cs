@@ -9,12 +9,15 @@ public class Cell
 
 	public BuildingInstance Building { get; private set; }
 
+	public Terrain Terrain { get; private set; }
+
 	// TODO add terrain functionality
 
-	public Cell (int x, int y)
+	public Cell (int x, int y, Terrain t)
 	{
 		this.x = x;
 		this.y = y;
+		this.Terrain = t;
 	}
 
 	public string toString ()

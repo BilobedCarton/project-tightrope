@@ -18,7 +18,7 @@ public class World
 	private List<Corporation> corporations;
 	private List<Nation> nations;
 
-	public World (int width, int length)
+	public World (int width, int length, List<Terrain> potentialTerrain)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();
@@ -37,6 +37,8 @@ public class World
 		this.player = new Player (this, resourceNames);
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
+
+		this.cells = MapBuilder.buildMap (MapBuilder.MapType.GRASSLAND, false, false, width, length, potentialTerrain);
 	}
 
 	public bool placeBuildingInstance (Cell location, string name, IEntity owner)
