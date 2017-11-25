@@ -18,7 +18,7 @@ public class World
 	private List<Corporation> corporations;
 	private List<Nation> nations;
 
-	public World (int width, int length, List<Terrain> potentialTerrain)
+	public World (int width, int length, List<TerrainType> potentialTerrain)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();

@@ -9,11 +9,11 @@ public class Cell
 
 	public BuildingInstance Building { get; private set; }
 
-	public Terrain Terrain { get; private set; }
+	public TerrainType Terrain { get; private set; }
 
 	// TODO add terrain functionality
 
-	public Cell (int x, int y, Terrain t)
+	public Cell (int x, int y, TerrainType t)
 	{
 		this.x = x;
 		this.y = y;

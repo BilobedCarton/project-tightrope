@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <TerrainType>
-	<Terrain id=0>
+	<Terrain id="0">
 		<name>ColdFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -10,7 +10,7 @@
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Terrain>
-	<Terrain id=1>
+	<Terrain id="1">
 		<name>ColdBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -20,7 +20,7 @@
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Terrain>
-	<Terrain id=2>
+	<Terrain id="2">
 		<name>ColdTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -30,7 +30,7 @@
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Terrain>
-	<Terrain id=3>
+	<Terrain id="3">
 		<name>EvenFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -40,7 +40,7 @@
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Terrain>
-	<Terrain id=4>
+	<Terrain id="4">
 		<name>EvenBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -50,7 +50,7 @@
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Terrain>
-	<Terrain id=5>
+	<Terrain id="5">
 		<name>EvenTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -60,7 +60,7 @@
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Terrain>
-	<Terrain id=6>
+	<Terrain id="6">
 		<name>WarmFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -70,7 +70,7 @@
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Terrain>
-	<Terrain id=7>
+	<Terrain id="7">
 		<name>WarmBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
@@ -80,7 +80,7 @@
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Terrain>
-	<Terrain id=8>
+	<Terrain id="8">
 		<name>WarmTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>

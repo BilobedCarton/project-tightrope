@@ -7,11 +7,22 @@ using System.IO;
 
 public class TerrainImporter
 {
-	public static List<Terrain> importTerrain ()
+	public static List<TerrainType> importTerrain ()
 	{
-		List<Terrain> terrain = new List<Terrain> ();
-		FileStream fs = new FileStream ("Resources/Data/TerrainTypes.xml", FileMode.Open, FileAccess.Read);
+		FileStream fs = new FileStream ("Assets/Resources/Data/TerrainTypes.xml", FileMode.Open, FileAccess.Read);
+		XmlDocument doc = new XmlDocument ();
+		doc.Load (fs);
 
-		return terrain;
+		XmlNodeList xmlNodes = doc.GetElementsByTagName ("Terrain");
+		List<TerrainType> terrainTypes = new List<TerrainType> ();
+
+		foreach (XmlNode n in xmlNodes) {
+			terrainTypes.Add (TerrainType.createTerrainType (int.Parse (n.Attributes [0].Value),
+				n.ChildNodes [0].InnerText, float.Parse (n.ChildNodes [1].InnerText), float.Parse (n.ChildNodes [2].InnerText),
+				n.ChildNodes [3].InnerText, float.Parse (n.ChildNodes [4].InnerText), float.Parse (n.ChildNodes [5].InnerText),
+				int.Parse (n.ChildNodes [6].InnerText), int.Parse (n.ChildNodes [7].InnerText)));
+		}
+
+		return terrainTypes;
 	}
 }

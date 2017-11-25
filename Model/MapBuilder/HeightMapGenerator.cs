@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class HeightMapGenerator
 {
-	private static Random picker = new Random ();
+	private static System.Random picker = new System.Random ();
 
 	private string seed;
 	private float[,] heightMap;
@@ -13,10 +14,10 @@ public class HeightMapGenerator
 	{
 		this.seed = seed;
 		heightMap = new float[width, length];
-		heightMap [0, 0] = seed.ToCharArray () [0];
-		heightMap [0, width - 1] = seed.ToCharArray () [1];
-		heightMap [length - 1, 0] = seed.ToCharArray () [2];
-		heightMap [length - 1, width - 1] = seed.ToCharArray () [3];
+		heightMap [0, 0] = seed.ToCharArray () [0] % 26;
+		heightMap [0, width - 1] = seed.ToCharArray () [1] % 26;
+		heightMap [length - 1, 0] = seed.ToCharArray () [2] % 26;
+		heightMap [length - 1, width - 1] = seed.ToCharArray () [3] % 26;
 	}
 
 	// Generate the heights using an implementation of diamond square height map generation.
@@ -30,6 +31,8 @@ public class HeightMapGenerator
 
 	private void runDiamondSquareStep (int x0, int y0, int x1, int y1)
 	{
+		Debug.Log ("tl: (" + x0 + "," + y0 + "), br: (" + x1 + "," + y1 + ")");
+
 		// diamond step
 		heightMap [getMidpoint (x0, x1), getMidpoint (y0, y1)] = 
 			((heightMap [x0, y0] + heightMap [x1, y0] + heightMap [x1, y1] + heightMap [x0, y1]) / 4)
@@ -64,7 +67,7 @@ public class HeightMapGenerator
 			+ picker.Next (-2, 4);
 		}
 
-		if (x1 == heightMap.GetLength (0)) {
+		if (x1 == heightMap.GetLength (0) - 1) {
 			heightMap [x1, getMidpoint (y0, y1)] = ((heightMap [x1, y0]
 			+ heightMap [getMidpoint (x0, x1), getMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
@@ -78,7 +81,7 @@ public class HeightMapGenerator
 			+ picker.Next (-2, 4);
 		}
 
-		if (y1 == heightMap.GetLength (1)) {
+		if (y1 == heightMap.GetLength (1) - 1) {
 			heightMap [getMidpoint (x0, x1), y1] = ((heightMap [x0, y1]
 			+ heightMap [getMidpoint (x0, x1), getMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
@@ -91,7 +94,9 @@ public class HeightMapGenerator
 			+ heightMap [getMidpoint (x0, x1), getMidpoint (y1, (2 * y1) - y0)]) / 4)
 			+ picker.Next (-2, 4);
 		}
-
+		if (x1 - x0 == 2 || y1 - y0 == 2) {
+			return;
+		} 
 		// Run the steps on the subdivided squares
 		runDiamondSquareStep (x0, y0, (x1 - x0) / 2, (y1 - y0) / 2);
 		runDiamondSquareStep ((x1 - x0) / 2, y0, x1, (y1 - y0) / 2);

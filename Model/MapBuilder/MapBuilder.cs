@@ -22,7 +22,7 @@ public class MapBuilder
 
 	private Cell[,] map;
 
-	private List<Terrain> potentialTerrain;
+	private List<TerrainType> potentialTerrain;
 
 	private System.Random picker;
 
@@ -32,7 +32,7 @@ public class MapBuilder
 		bool isOcean, 
 		int width, 
 		int length, 
-		List<Terrain> potentialTerrain)
+		List<TerrainType> potentialTerrain)
 	{
 		MapBuilder builder = new MapBuilder {
 			type = type,
@@ -45,13 +45,14 @@ public class MapBuilder
 			picker = new System.Random ()
 		};
 
-		float[,] heightMap = HeightMapGenerator.buildHeightMap ("some seed", width, length);
+		float[,] heightMap = HeightMapGenerator.buildHeightMap ("seed", width, length);
 		int[,] temperatureMap = builder.generateTemperatures (heightMap);
 		// do some stuff
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
 				builder.map [i, j] = new Cell (i, j, builder.selectTerrain (heightMap [i, j], temperatureMap [i, j]));
+				Debug.Log (builder.map [i, j].toString () + "_height_" + heightMap [i, j] + "_temperature_" + temperatureMap [i, j]);
 			}
 		}
 
@@ -101,11 +102,14 @@ public class MapBuilder
 		return temperatureMap;
 	}
 
-	private Terrain selectTerrain (float height, int temperature)
+	private TerrainType selectTerrain (float height, int temperature)
 	{
-		List<Terrain> options = potentialTerrain.FindAll (t => {
-			return t.isOption (height, temperature);
-		});
+		List<TerrainType> options = new List<TerrainType> ();
+		foreach (TerrainType t in potentialTerrain) {
+			if (t.isOption (height, temperature)) {
+				options.Add (t);
+			}
+		}
 
 		if (options.Count == 0) {
 			Debug.LogError ("MapBuilder.selectTerrain(...) -- No possible options for given data.");
