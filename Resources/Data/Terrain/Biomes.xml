@@ -5,7 +5,7 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>-3</lowestElevation>
+		<lowestElevation>-40</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
@@ -26,7 +26,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>30</highestElevation>
+		<highestElevation>40</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Terrain>
@@ -35,7 +35,7 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>-3</lowestElevation>
+		<lowestElevation>-40</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
@@ -56,7 +56,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>30</highestElevation>
+		<highestElevation>40</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Terrain>
@@ -65,8 +65,8 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>5</lowestElevation>
-		<highestElevation>12</highestElevation>
+		<lowestElevation>-40</lowestElevation>
+		<highestElevation>5</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Terrain>
@@ -86,7 +86,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>30</highestElevation>
+		<highestElevation>40</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Terrain>

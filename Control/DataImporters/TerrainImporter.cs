@@ -9,7 +9,7 @@ public class TerrainImporter
 {
 	public static List<TerrainType> importTerrain ()
 	{
-		FileStream fs = new FileStream ("Assets/Resources/Data/TerrainTypes.xml", FileMode.Open, FileAccess.Read);
+		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Elevations.xml", FileMode.Open, FileAccess.Read);
 		XmlDocument doc = new XmlDocument ();
 		doc.Load (fs);
 
@@ -17,7 +17,7 @@ public class TerrainImporter
 		List<TerrainType> terrainTypes = new List<TerrainType> ();
 
 		foreach (XmlNode n in xmlNodes) {
-			terrainTypes.Add (TerrainType.createTerrainType (int.Parse (n.Attributes [0].Value),
+			terrainTypes.Add (TerrainType.createTerrainType (n.Attributes [0].Value,
 				n.ChildNodes [0].InnerText, float.Parse (n.ChildNodes [1].InnerText), float.Parse (n.ChildNodes [2].InnerText),
 				n.ChildNodes [3].InnerText, float.Parse (n.ChildNodes [4].InnerText), float.Parse (n.ChildNodes [5].InnerText),
 				int.Parse (n.ChildNodes [6].InnerText), int.Parse (n.ChildNodes [7].InnerText)));

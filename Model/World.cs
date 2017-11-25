@@ -8,8 +8,9 @@ public class World
 	private List<BuildingInstance> buildings;
 	private List<District> districts;
 
-	private int width;
-	private int length;
+	public int Width { get; private set; }
+
+	public int Length { get; private set; }
 
 	private Dictionary<string, BuildingPrototype> buildingPrototypes;
 	private Dictionary<string, Resource> resources;
@@ -24,8 +25,8 @@ public class World
 		this.buildings = new List<BuildingInstance> ();
 		this.districts = new List<District> ();
 
-		this.width = width;
-		this.length = length;
+		this.Width = width;
+		this.Length = length;
 
 		this.buildingPrototypes = new Dictionary<string, BuildingPrototype> ();
 		this.resources = new Dictionary<string, Resource> ();
@@ -87,6 +88,15 @@ public class World
 	public float getResourceCost (string name)
 	{
 		return this.resources [name].Price;
+	}
+
+	public Cell getCellDataAt (int x, int y)
+	{
+		if (x >= Width || y >= Length) {
+			Debug.LogError ("World.getCellDataAt(...) -- trying to access cell at non-existent indices.");
+			return null;
+		} 
+		return cells [x, y];
 	}
 
 	public void runTick ()

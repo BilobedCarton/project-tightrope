@@ -45,14 +45,13 @@ public class MapBuilder
 			picker = new System.Random ()
 		};
 
-		float[,] heightMap = HeightMapGenerator.buildHeightMap ("seed", width, length);
+		float[,] heightMap = HeightMapGenerator.buildHeightMap ("49AHM", width, length);
 		int[,] temperatureMap = builder.generateTemperatures (heightMap);
 		// do some stuff
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
 				builder.map [i, j] = new Cell (i, j, builder.selectTerrain (heightMap [i, j], temperatureMap [i, j]));
-				Debug.Log (builder.map [i, j].toString () + "_height_" + heightMap [i, j] + "_temperature_" + temperatureMap [i, j]);
 			}
 		}
 
@@ -112,7 +111,8 @@ public class MapBuilder
 		}
 
 		if (options.Count == 0) {
-			Debug.LogError ("MapBuilder.selectTerrain(...) -- No possible options for given data.");
+			Debug.LogError ("MapBuilder.selectTerrain(...) -- No possible options for given data. Height: "
+			+ height + ", Temperature: " + temperature);
 			return null;
 		}
 

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Cell
 {
-	private int x;
-	private int y;
+	public int X { get; private set; }
+
+	public int Y { get; private set; }
 
 	public BuildingInstance Building { get; private set; }
 
@@ -15,14 +16,14 @@ public class Cell
 
 	public Cell (int x, int y, TerrainType t)
 	{
-		this.x = x;
-		this.y = y;
+		this.X = x;
+		this.Y = y;
 		this.Terrain = t;
 	}
 
 	public string toString ()
 	{
-		return "Cell_" + x + "_" + y;
+		return "Cell_" + X + "_" + Y;
 	}
 
 	public void placeBuildingInstance (BuildingPrototype proto, IEntity owner)

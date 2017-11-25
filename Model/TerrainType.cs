@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TerrainType
 {
-	private int id;
+	public string Id { get; private set; }
+
 	private string name;
 	private float buildCostModifier;
 	private float baseMovementModifier;
@@ -15,7 +16,7 @@ public class TerrainType
 	private int highestTemperature;
 
 	public static TerrainType createTerrainType (
-		int id,
+		string id,
 		string name, 
 		float buildCostModifier, 
 		float baseMovementModifier, 
@@ -28,7 +29,7 @@ public class TerrainType
 		List<string> potentialResources = new List<string> ();
 		potentialResources = new List<string> (potentialResourcesList.Split (new char[] { ',' }));
 		return new TerrainType {
-			id = id,
+			Id = id,
 			name = name,
 			buildCostModifier = buildCostModifier,
 			baseMovementModifier = baseMovementModifier,
@@ -46,11 +47,5 @@ public class TerrainType
 		&& elevation <= highestElevation
 		&& temperature >= lowestTemperature
 		&& temperature <= highestTemperature;
-	}
-
-	public string toString ()
-	{
-		return id + "_" + name + "_" + buildCostModifier + "_" + baseMovementModifier + "_"
-		+ lowestElevation + "_" + highestElevation + "_" + lowestTemperature + "_" + highestTemperature;
 	}
 }

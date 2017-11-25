@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<TerrainType>
+	<Terrain id="Height_0">
+		<name>ColdFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>-40</lowestElevation>
+		<highestElevation>0</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_1">
+		<name>ColdBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>-0.1</lowestElevation>
+		<highestElevation>5</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_2">
+		<name>ColdTall</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>4.9</lowestElevation>
+		<highestElevation>10</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_3">
+		<name>ColdFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>9.9</lowestElevation>
+		<highestElevation>15</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_4">
+		<name>ColdBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>14.9</lowestElevation>
+		<highestElevation>20</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_5">
+		<name>ColdTall</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>19.9</lowestElevation>
+		<highestElevation>25</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_6">
+		<name>ColdFlat</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>24.9</lowestElevation>
+		<highestElevation>30</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+	<Terrain id="Height_7">
+		<name>ColdBumpy</name>
+		<buildCostModifier>1.0</buildCostModifier>
+		<baseMovementModifier>1.0</baseMovementModifier>
+		<potentialResources></potentialResources>
+		<lowestElevation>29.9</lowestElevation>
+		<highestElevation>50</highestElevation>
+		<lowestTemperature>-100</lowestTemperature>
+		<highestTemperature>100</highestTemperature>
+	</Terrain>
+</TerrainType>
