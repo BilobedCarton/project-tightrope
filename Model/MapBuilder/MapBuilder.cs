@@ -22,7 +22,7 @@ public class MapBuilder
 
 	private Cell[,] map;
 
-	private List<TerrainType> potentialTerrain;
+	private List<Biome> potentialTerrain;
 
 	private System.Random picker;
 
@@ -32,7 +32,7 @@ public class MapBuilder
 		bool isOcean, 
 		int width, 
 		int length, 
-		List<TerrainType> potentialTerrain)
+		List<Biome> potentialTerrain)
 	{
 		MapBuilder builder = new MapBuilder {
 			type = type,
@@ -45,17 +45,48 @@ public class MapBuilder
 			picker = new System.Random ()
 		};
 
-		float[,] heightMap = HeightMapGenerator.buildHeightMap ("49AHM", width, length);
+		float[,] heightMap = HeightMapGenerator.buildHeightMap ("food", width, length);
 		int[,] temperatureMap = builder.generateTemperatures (heightMap);
 		// do some stuff
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
-				builder.map [i, j] = new Cell (i, j, builder.selectTerrain (heightMap [i, j], temperatureMap [i, j]));
+				builder.map [i, j] = new Cell (
+					i, j, heightMap [i, j], temperatureMap [i, j], builder.selectTerrain (heightMap [i, j], temperatureMap [i, j]));
 			}
 		}
 
 		return builder.map;
+	}
+
+	public static void averageValues (int[,] values)
+	{
+		int leftVal, topVal, rightVal, botVal;
+		for (int i = 0; i < values.GetLength (0); i++) {
+			for (int j = 0; j < values.GetLength (1); j++) {
+				leftVal = i == 0 ? values [i, j] : values [i - 1, j];
+				topVal = j == 0 ? values [i, j] : values [i, j - 1];
+				rightVal = i == values.GetLength (0) - 1 ? values [i, j] : values [i + 1, j];
+				botVal = j == values.GetLength (1) - 1 ? values [i, j] : values [i, j + 1];
+
+				values [i, j] = (values [i, j] + leftVal + topVal + rightVal + botVal) / 5;
+			}
+		}
+	}
+
+	public static void averageValues (float[,] values)
+	{
+		float leftVal, topVal, rightVal, botVal;
+		for (int i = 0; i < values.GetLength (0); i++) {
+			for (int j = 0; j < values.GetLength (1); j++) {
+				leftVal = i == 0 ? values [i, j] : values [i - 1, j];
+				topVal = j == 0 ? values [i, j] : values [i, j - 1];
+				rightVal = i == values.GetLength (0) - 1 ? values [i, j] : values [i + 1, j];
+				botVal = j == values.GetLength (1) - 1 ? values [i, j] : values [i, j + 1];
+
+				values [i, j] = (values [i, j] + leftVal + topVal + rightVal + botVal) / 5;
+			}
+		}
 	}
 
 	// in celcius.
@@ -66,13 +97,13 @@ public class MapBuilder
 		int temperatureModifier;
 		switch (type) {
 		case MapType.ALPINE:
-			temperatureModifier = -5;
+			temperatureModifier = -10;
 			break;
 		case MapType.GRASSLAND:
 			temperatureModifier = 0;
 			break;
 		case MapType.HIGHLANDS:
-			temperatureModifier = -10;
+			temperatureModifier = -15;
 			break;
 		case MapType.ISLAND:
 			temperatureModifier = 5;
@@ -85,26 +116,35 @@ public class MapBuilder
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
 				currHeight = heights [i, j];
-				if (currHeight > 15) {
+				if (currHeight > 35) {
+					temperatureMap [i, j] = picker.Next (-20, -5) + temperatureModifier;
+				} else if (currHeight > 30) {
+					temperatureMap [i, j] = picker.Next (-10, 0) + temperatureModifier;
+				} else if (currHeight > 25) {
+					temperatureMap [i, j] = picker.Next (-5, 5) + temperatureModifier;
+				} else if (currHeight > 20) {
 					temperatureMap [i, j] = picker.Next (0, 10) + temperatureModifier;
-				} else if (currHeight > 10) {
+				} else if (currHeight > 15) {
 					temperatureMap [i, j] = picker.Next (5, 15) + temperatureModifier;
-				} else if (currHeight > 5) {
+				} else if (currHeight > 10) {
 					temperatureMap [i, j] = picker.Next (10, 20) + temperatureModifier;
-				} else if (currHeight > 0) {
+				} else if (currHeight > 5) {
 					temperatureMap [i, j] = picker.Next (15, 25) + temperatureModifier;
-				} else {
+				} else if (currHeight > 0) {
 					temperatureMap [i, j] = picker.Next (20, 30) + temperatureModifier;
+				} else {
+					temperatureMap [i, j] = picker.Next (25, 35) + temperatureModifier;
 				}
 			}
 		}
+		averageValues (temperatureMap);
 		return temperatureMap;
 	}
 
-	private TerrainType selectTerrain (float height, int temperature)
+	private Biome selectTerrain (float height, int temperature)
 	{
-		List<TerrainType> options = new List<TerrainType> ();
-		foreach (TerrainType t in potentialTerrain) {
+		List<Biome> options = new List<Biome> ();
+		foreach (Biome t in potentialTerrain) {
 			if (t.isOption (height, temperature)) {
 				options.Add (t);
 			}

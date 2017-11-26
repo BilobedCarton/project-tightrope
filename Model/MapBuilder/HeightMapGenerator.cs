@@ -36,7 +36,7 @@ public class HeightMapGenerator
 	{
 		HeightMapGenerator generator = new HeightMapGenerator (seed, width, length);
 		generator.runDiamondSquareStep (0, 0, width - 1, length - 1);
-		generator.runErosion ();
+		MapBuilder.averageValues (generator.heightMap);
 		return generator.heightMap;
 	}
 
@@ -135,20 +135,5 @@ public class HeightMapGenerator
 			return p2 + ((p1 - p2) / 2);
 		}
 		return p1;
-	}
-
-	private void runErosion ()
-	{
-		float leftVal, topVal, rightVal, botVal;
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < length; j++) {
-				leftVal = i == 0 ? heightMap [i, j] : heightMap [i - 1, j];
-				topVal = j == 0 ? heightMap [i, j] : heightMap [i, j - 1];
-				rightVal = i == width - 1 ? heightMap [i, j] : heightMap [i + 1, j];
-				botVal = j == length - 1 ? heightMap [i, j] : heightMap [i, j + 1];
-
-				heightMap [i, j] = (heightMap [i, j] + leftVal + topVal + rightVal + botVal) / 5;
-			}
-		}
 	}
 }

@@ -7,17 +7,17 @@ using System.IO;
 
 public class TerrainImporter
 {
-	public static List<TerrainType> importTerrain ()
+	public static List<Biome> importTerrain ()
 	{
-		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Elevations.xml", FileMode.Open, FileAccess.Read);
+		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Temperatures.xml", FileMode.Open, FileAccess.Read);
 		XmlDocument doc = new XmlDocument ();
 		doc.Load (fs);
 
 		XmlNodeList xmlNodes = doc.GetElementsByTagName ("Terrain");
-		List<TerrainType> terrainTypes = new List<TerrainType> ();
+		List<Biome> terrainTypes = new List<Biome> ();
 
 		foreach (XmlNode n in xmlNodes) {
-			terrainTypes.Add (TerrainType.createTerrainType (n.Attributes [0].Value,
+			terrainTypes.Add (Biome.createTerrainType (n.Attributes [0].Value,
 				n.ChildNodes [0].InnerText, float.Parse (n.ChildNodes [1].InnerText), float.Parse (n.ChildNodes [2].InnerText),
 				n.ChildNodes [3].InnerText, float.Parse (n.ChildNodes [4].InnerText), float.Parse (n.ChildNodes [5].InnerText),
 				int.Parse (n.ChildNodes [6].InnerText), int.Parse (n.ChildNodes [7].InnerText)));

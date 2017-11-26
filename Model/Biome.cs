@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainType
+public class Biome
 {
 	public string Id { get; private set; }
 
@@ -15,7 +15,7 @@ public class TerrainType
 	private int lowestTemperature;
 	private int highestTemperature;
 
-	public static TerrainType createTerrainType (
+	public static Biome createTerrainType (
 		string id,
 		string name, 
 		float buildCostModifier, 
@@ -28,7 +28,7 @@ public class TerrainType
 	{
 		List<string> potentialResources = new List<string> ();
 		potentialResources = new List<string> (potentialResourcesList.Split (new char[] { ',' }));
-		return new TerrainType {
+		return new Biome {
 			Id = id,
 			name = name,
 			buildCostModifier = buildCostModifier,
