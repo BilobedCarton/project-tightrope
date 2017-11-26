@@ -497,7 +497,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2046428997}
-        m_MethodName: setMapMode
+        m_MethodName: SetMapMode
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -619,7 +619,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2046428997}
-        m_MethodName: setMapMode
+        m_MethodName: SetMapMode
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -905,7 +905,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2046428997}
-        m_MethodName: generateWorld
+        m_MethodName: GenerateWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

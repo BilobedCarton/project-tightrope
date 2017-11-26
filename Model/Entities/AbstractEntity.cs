@@ -68,7 +68,7 @@ public class AbstractEntity : IEntity
 		}
 	}
 
-	public float getMoneyBalance ()
+	public float GetMoneyBalance ()
 	{
 		return this.moneyBalance;
 	}
