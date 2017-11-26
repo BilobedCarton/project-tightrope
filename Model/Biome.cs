@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a Biome for a map.
 public class Biome
 {
 	public string Id { get; private set; }
@@ -15,7 +16,8 @@ public class Biome
 	private int lowestTemperature;
 	private int highestTemperature;
 
-	public static Biome createTerrainType (
+	// Creates a new Biome based upon the given information.
+	public static Biome CreateTerrainType (
 		string id,
 		string name, 
 		float buildCostModifier, 
@@ -41,7 +43,8 @@ public class Biome
 		};
 	}
 
-	public bool isOption (float elevation, int temperature)
+	// Determines if this Biome meets the given requirements.
+	public bool IsOption (float elevation, int temperature)
 	{
 		return elevation >= lowestElevation
 		&& elevation <= highestElevation

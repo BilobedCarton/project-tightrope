@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a type of building buildable by an IEntity.
 public class BuildingPrototype
 {
 	private string name;
@@ -10,7 +11,8 @@ public class BuildingPrototype
 
 	public Dictionary<string, int> ChangeInResources { get; private set; }
 
-	public static BuildingPrototype createBuildingPrototype (
+	// Creates a new BuildingPrototype with the given values.
+	public static BuildingPrototype CreateBuildingPrototype (
 		string name, Dictionary<string, int> resourcesRequired, Dictionary<string, int> resourcesProduced)
 	{
 		BuildingPrototype proto = new BuildingPrototype {
@@ -21,7 +23,8 @@ public class BuildingPrototype
 		return proto;
 	}
 
-	public BuildingInstance buildInstance (Cell location, IEntity owner)
+	// Creates a new instance of this type of Building at the given Cell location to be owned by the given IEntity.
+	public BuildingInstance BuildInstance (Cell location, IEntity owner)
 	{
 		return new BuildingInstance (location, this, owner);
 	}

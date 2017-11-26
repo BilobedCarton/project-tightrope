@@ -5,19 +5,23 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.IO;
 
-public class TerrainImporter
+// Imports all the biomes described in the Biomes.xml file.
+public static class BiomeImporter
 {
-	public static List<Biome> importTerrain ()
+	// This is the action method of this importer.
+	public static List<Biome> Import ()
 	{
-		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Temperatures.xml", FileMode.Open, FileAccess.Read);
+		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Biomes.xml", FileMode.Open, FileAccess.Read);
 		XmlDocument doc = new XmlDocument ();
 		doc.Load (fs);
 
-		XmlNodeList xmlNodes = doc.GetElementsByTagName ("Terrain");
+		// Select all the Biome elements of the xml file.
+		XmlNodeList xmlNodes = doc.GetElementsByTagName ("Biome");
 		List<Biome> terrainTypes = new List<Biome> ();
 
+		// Add their data.
 		foreach (XmlNode n in xmlNodes) {
-			terrainTypes.Add (Biome.createTerrainType (n.Attributes [0].Value,
+			terrainTypes.Add (Biome.CreateTerrainType (n.Attributes [0].Value,
 				n.ChildNodes [0].InnerText, float.Parse (n.ChildNodes [1].InnerText), float.Parse (n.ChildNodes [2].InnerText),
 				n.ChildNodes [3].InnerText, float.Parse (n.ChildNodes [4].InnerText), float.Parse (n.ChildNodes [5].InnerText),
 				int.Parse (n.ChildNodes [6].InnerText), int.Parse (n.ChildNodes [7].InnerText)));

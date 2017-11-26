@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls mouse based controls for the user.
 public class MouseController : MonoBehaviour
 {
-
+	// Relevant for camera movement.
 	Vector3 lastFramePosition;
 	Vector3 currFramePosition;
 
@@ -17,16 +18,16 @@ public class MouseController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		// updates involved in camera management.
 		currFramePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		currFramePosition.z = 0;
-
-		updateCameraMovement ();
-
+		UpdateCameraMovement ();
 		lastFramePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		lastFramePosition.z = 0;
 	}
 
-	void updateCameraMovement ()
+	// Updates the camera with drag actions and user zoom movements.
+	void UpdateCameraMovement ()
 	{
 		if (Input.GetMouseButton (1) || Input.GetMouseButton (2)) {
 			Vector3 diff = lastFramePosition - currFramePosition;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents an instance of a building.
 public class BuildingInstance
 {
 	private Cell location;
@@ -9,6 +10,7 @@ public class BuildingInstance
 
 	public IEntity Owner { get; private set; }
 
+	// Creates a new BuildInstance with the given Cell as its location, based upon the given BuildingPrototype, and owned by the given IEntity.
 	public BuildingInstance (Cell location, BuildingPrototype proto, IEntity owner)
 	{
 		this.location = location;
@@ -16,23 +18,25 @@ public class BuildingInstance
 		this.Owner = owner;
 	}
 
-	public void runTick (World world)
+	// Runs a tick, changing resource values based on this building's input and output.
+	public void RunTick (World world)
 	{
 		foreach (var resource in this.proto.ChangeInResources) {
-			if (Owner.getResourceAmount (resource.Key) < -resource.Value
-			    && Owner.getMoneyBalance () < world.getResourceCost (resource.Key) * (-resource.Value - Owner.getResourceAmount (resource.Key))) {
+			if (Owner.GetResourceAmount (resource.Key) < -resource.Value
+			    && Owner.GetMoneyBalance () < world.GetResourceCost (resource.Key) * (-resource.Value - Owner.GetResourceAmount (resource.Key))) {
 				return;
 			}
 		}
 		foreach (var resource in this.proto.ChangeInResources) {
-			if (Owner.getResourceAmount (resource.Key) < -resource.Value) {
-				Owner.purchaseResource (resource.Key, -resource.Value - Owner.getResourceAmount (resource.Key));
+			if (Owner.GetResourceAmount (resource.Key) < -resource.Value) {
+				Owner.PurchaseResource (resource.Key, -resource.Value - Owner.GetResourceAmount (resource.Key));
 			}
-			Owner.changeResourceAmount (resource.Key, resource.Value);
+			Owner.ChangeResourceAmount (resource.Key, resource.Value);
 		}
 	}
 
-	public int getChangeInResource (string name)
+	// Gets the amount this structure will change a stockpile of the given resource.
+	public int GetChangeInResource (string name)
 	{
 		return this.proto.ChangeInResources [name];
 	}

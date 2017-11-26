@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a square on a map, or a cell.
 public class Cell
 {
 	public int X { get; private set; }
@@ -17,6 +18,7 @@ public class Cell
 
 	// TODO add terrain functionality
 
+	// Creates a new Cell object at the given coords with the given data.
 	public Cell (int x, int y, float elevation, int temperature, Biome t)
 	{
 		this.X = x;
@@ -26,32 +28,36 @@ public class Cell
 		this.Terrain = t;
 	}
 
-	public string toString ()
+	// Converts this cell to a string.
+	public string ToString ()
 	{
 		return "Cell_" + X + "_" + Y;
 	}
 
-	public void placeBuildingInstance (BuildingPrototype proto, IEntity owner)
+	// Places an instance of the given building on this cell with the given owner.
+	public void PlaceBuildingInstance (BuildingPrototype proto, IEntity owner)
 	{
-		this.Building = proto.buildInstance (this, owner);
+		this.Building = proto.BuildInstance (this, owner);
 	}
 
-	public string getSpriteId (WorldController.MapMode mapMode)
+	// Gets the id of the sprite for the given mapmode that correlates with this cell's data.
+	public string GetSpriteId (WorldController.MapMode mapMode)
 	{
 		switch (mapMode) {
 		case WorldController.MapMode.BIOME:
 			return this.Terrain.Id;
 		case WorldController.MapMode.ELEVATION:
-			return this.getElevationId ();
+			return this.GetElevationId ();
 		case WorldController.MapMode.TEMPERATURE:
-			return this.getTemperatureId ();
+			return this.GetTemperatureId ();
 		default:
 			Debug.LogError ("Cell.getSpriteId(..) -- unrecognizable map mode");
 			return "";
 		}
 	}
 
-	private string getElevationId ()
+	// Gets the id of this cell for an Elevation map display.
+	private string GetElevationId ()
 	{
 		if (elevation < 0) {
 			return "0";
@@ -72,7 +78,8 @@ public class Cell
 		}
 	}
 
-	private string getTemperatureId ()
+	// Gets the id of this cell for a Temperature map display.
+	private string GetTemperatureId ()
 	{
 		if (temperature < -10) {
 			return "0";

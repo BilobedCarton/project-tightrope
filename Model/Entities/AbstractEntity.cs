@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents an absract implementation of an IEntity.
 public class AbstractEntity : IEntity
 {
 	private World world;
@@ -11,6 +12,7 @@ public class AbstractEntity : IEntity
 	private string name;
 	private float moneyBalance;
 
+	// Creates a new entity with the given name, resource values, and existing in the given world.
 	public AbstractEntity (World world, List<string> resources, string name)
 	{
 		this.world = world;
@@ -22,7 +24,7 @@ public class AbstractEntity : IEntity
 		this.moneyBalance = 0;
 	}
 
-	public void changeResourceAmount (string name, int change)
+	public void ChangeResourceAmount (string name, int change)
 	{
 		if (this.currentResources.ContainsKey (name) == false) {
 			this.currentResources.Add (name, change);
@@ -31,7 +33,7 @@ public class AbstractEntity : IEntity
 		this.currentResources.Add (name, this.currentResources [name] + change);
 	}
 
-	public int getResourceAmount (string name)
+	public int GetResourceAmount (string name)
 	{
 		if (this.currentResources.ContainsKey (name) == false) {
 			return 0;
@@ -39,30 +41,30 @@ public class AbstractEntity : IEntity
 		return this.currentResources [name];
 	}
 
-	public void purchaseResource (string name, int amount)
+	public void PurchaseResource (string name, int amount)
 	{
-		if (world.getResourceCost (name) * amount > this.moneyBalance) {
+		if (world.GetResourceCost (name) * amount > this.moneyBalance) {
 			Debug.LogError ("AbstractEntity.purchaseResource(...) -- trying to purchase more of given resource than able.");
 			return;
 		}
-		this.moneyBalance -= amount * world.getResourceCost (name);
-		this.changeResourceAmount (name, amount);
+		this.moneyBalance -= amount * world.GetResourceCost (name);
+		this.ChangeResourceAmount (name, amount);
 	}
 
-	public void sellResource (string name, int amount)
+	public void SellResource (string name, int amount)
 	{
-		if (this.getResourceAmount (name) < amount) {
+		if (this.GetResourceAmount (name) < amount) {
 			Debug.LogError ("AbstractEntity.sellResource(...) -- trying to sell more of a given resource than able.");
 			return;
 		}
-		this.changeResourceAmount (name, -amount);
-		this.moneyBalance += amount * world.getResourceCost (name);
+		this.ChangeResourceAmount (name, -amount);
+		this.moneyBalance += amount * world.GetResourceCost (name);
 	}
 
-	public void placeBuildingInstance (Cell location, string name)
+	public void PlaceBuildingInstance (Cell location, string name)
 	{
-		if (world.placeBuildingInstance (location, name, this) == false) {
-			Debug.Log ("Failed to place structure of type: " + name + " at " + location.toString ());
+		if (world.PlaceBuildingInstance (location, name, this) == false) {
+			Debug.Log ("Failed to place structure of type: " + name + " at " + location.ToString ());
 		}
 	}
 

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Controls the world, acts as the medium between Unity and the Model.
 public class WorldController : MonoBehaviour
 {
+	// For display purposes.
 	public enum MapMode
 	{
 		BIOME,
 		ELEVATION,
 		TEMPERATURE
 	}
+
+	public static WorldController _instance;
 
 	private World world;
 
@@ -23,12 +27,18 @@ public class WorldController : MonoBehaviour
 	// Use this for initialization
 	void OnEnable ()
 	{
-		loadSprites ();
+		if (_instance != null) {
+			Debug.LogError ("WorldController.OnEnable() -- _instance should be null but isn't.");
+		}
+
+		_instance = this;
+
+		LoadSprites ();
 
 		cellGameObjectMap = new Dictionary<Cell, GameObject> ();
 		mapMode = MapMode.ELEVATION;
 
-		generateWorld ();
+		GenerateWorld ();
 	}
 
 	// Update is called once per frame
@@ -37,15 +47,17 @@ public class WorldController : MonoBehaviour
 		
 	}
 
-	public void generateWorld ()
+	// Deletes anything involved in rendering the previous world and generates new instances of involved model objects and game objects.
+	public void GenerateWorld ()
 	{
-		this.destroyAllCellGameObjects ();
-		this.world = new World (65, 65, TerrainImporter.importTerrain ());
-		this.createAllCellGameObjects (this.world);
-		updateAllCellGameObjects ();
+		this.DestroyAllCellGameObjects ();
+		this.world = new World (65, 65, BiomeImporter.Import ());
+		this.CreateAllCellGameObjects (this.world);
+		UpdateAllCellGameObjects ();
 	}
 
-	public void setMapMode (string mode)
+	// Sets the map mode to the given value.
+	public void SetMapMode (string mode)
 	{
 		switch (mode) {
 		case "BIOME":
@@ -59,10 +71,11 @@ public class WorldController : MonoBehaviour
 			break;
 		}
 
-		updateAllCellGameObjects ();
+		UpdateAllCellGameObjects ();
 	}
 
-	private void updateAllCellGameObjects ()
+	// Update the cell's sprites based on map mode.
+	private void UpdateAllCellGameObjects ()
 	{
 		string idPrefix = "Terrain_";
 		switch (mapMode) {
@@ -79,11 +92,12 @@ public class WorldController : MonoBehaviour
 
 		foreach (Cell cell_data in cellGameObjectMap.Keys) {
 			GameObject cell_go = cellGameObjectMap [cell_data];
-			cell_go.GetComponent <SpriteRenderer> ().sprite = terrainSprites [idPrefix + cell_data.getSpriteId (mapMode)];
+			cell_go.GetComponent <SpriteRenderer> ().sprite = terrainSprites [idPrefix + cell_data.GetSpriteId (mapMode)];
 		}
 	}
 
-	private void destroyAllCellGameObjects ()
+	// Deletes and destroys all game objects representing Cells.
+	private void DestroyAllCellGameObjects ()
 	{
 		while (cellGameObjectMap.Count > 0) {
 			Cell cell_data = cellGameObjectMap.Keys.First ();
@@ -94,17 +108,18 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
-	private void createAllCellGameObjects (World world)
+	// Creates new GameObjects to represent cells held within the given world.
+	private void CreateAllCellGameObjects (World world)
 	{
 		// Build game objects for the world.
 		for (int i = 0; i < world.Width; i++) {
 			for (int j = 0; j < world.Length; j++) {
-				Cell cell_data = world.getCellDataAt (i, j);
+				Cell cell_data = world.GetCellDataAt (i, j);
 				GameObject cell_go = new GameObject ();
 
 				cellGameObjectMap.Add (cell_data, cell_go);
 
-				cell_go.name = cell_data.toString ();
+				cell_go.name = cell_data.ToString ();
 				cell_go.transform.position = new Vector3 (cell_data.X, cell_data.Y, 1);
 				cell_go.transform.SetParent (this.transform, true);
 
@@ -113,17 +128,13 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
-	private void loadSprites ()
+	// Load the sprites for procedural objects.
+	private void LoadSprites ()
 	{
 		terrainSprites = new Dictionary<string, Sprite> ();
 		Sprite[] terrains = Resources.LoadAll<Sprite> ("Sprites/Terrain/");
 		foreach (Sprite s in terrains) {
 			terrainSprites [s.name] = s;
 		}
-	}
-
-	private Sprite getSpriteForTerrainType (Biome t)
-	{
-		return terrainSprites ["Terrain_" + t.Id];
 	}
 }

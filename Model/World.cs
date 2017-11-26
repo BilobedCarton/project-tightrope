@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a model of the world of this game.
 public class World
 {
 	private Cell[,] cells;
@@ -19,7 +20,8 @@ public class World
 	private List<Corporation> corporations;
 	private List<Nation> nations;
 
-	public World (int width, int length, List<Biome> potentialTerrain)
+	// Creates a new World with the given width and length, as well as the given possible Biome types.
+	public World (int width, int length, List<Biome> potentialBiomes)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();
@@ -39,10 +41,11 @@ public class World
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
 
-		this.cells = MapBuilder.buildMap (MapBuilder.MapType.GRASSLAND, false, false, width, length, potentialTerrain);
+		this.cells = MapBuilder.BuildMap (MapBuilder.MapType.GRASSLAND, false, false, width, length, potentialBiomes);
 	}
 
-	public bool placeBuildingInstance (Cell location, string name, IEntity owner)
+	// Places an instance of the given building in the given location with the given owner.
+	public bool PlaceBuildingInstance (Cell location, string name, IEntity owner)
 	{
 		if (buildingPrototypes.ContainsKey (name) == false) {
 			Debug.LogError ("World.placeBuildingInstance(...) -- trying to build non-existent type of building.");
@@ -50,47 +53,51 @@ public class World
 
 		BuildingPrototype proto = buildingPrototypes [name];
 		foreach (var resource in proto.ResourcesRequired) {
-			if (owner.getResourceAmount (resource.Key) < resource.Value) {
+			if (owner.GetResourceAmount (resource.Key) < resource.Value) {
 				return false;
 			}
 		}
 
 		foreach (var resource in proto.ResourcesRequired) {
-			owner.changeResourceAmount (resource.Key, -resource.Value);
+			owner.ChangeResourceAmount (resource.Key, -resource.Value);
 		}
 
-		location.placeBuildingInstance (proto, owner);
+		location.PlaceBuildingInstance (proto, owner);
 		return true;
 	}
 
-	public int getWorldStockpile (string resourceName)
+	// Gets the total amount of a given resource in existence in the world.
+	public int GetWorldStockpile (string resourceName)
 	{
 		int stockpile = 0;
-		stockpile += player.getResourceAmount (resourceName);
+		stockpile += player.GetResourceAmount (resourceName);
 		foreach (Corporation c in this.corporations) {
-			stockpile += c.getResourceAmount (resourceName);
+			stockpile += c.GetResourceAmount (resourceName);
 		}
 		foreach (Nation n in this.nations) {
-			stockpile += n.getResourceAmount (resourceName);
+			stockpile += n.GetResourceAmount (resourceName);
 		}
 		return stockpile;
 	}
 
-	public int getNextStockpileChange (string resourceName)
+	// Gets the next chnage in the world stockpile of a given resource.
+	public int GetNextStockpileChange (string resourceName)
 	{
 		int change = 0;
 		foreach (BuildingInstance b in this.buildings) {
-			change += b.getChangeInResource (resourceName);
+			change += b.GetChangeInResource (resourceName);
 		}
 		return change;
 	}
 
-	public float getResourceCost (string name)
+	// Gets the current value of a given resource.
+	public float GetResourceCost (string name)
 	{
 		return this.resources [name].Price;
 	}
 
-	public Cell getCellDataAt (int x, int y)
+	// Gets the Cell object at the given coordinates.
+	public Cell GetCellDataAt (int x, int y)
 	{
 		if (x >= Width || y >= Length) {
 			Debug.LogError ("World.getCellDataAt(...) -- trying to access cell at non-existent indices.");
@@ -99,13 +106,14 @@ public class World
 		return cells [x, y];
 	}
 
-	public void runTick ()
+	// Runs a single tick of execution on this world.
+	public void RunTick ()
 	{
 		foreach (var b in buildings) {
-			b.runTick (this);
+			b.RunTick (this);
 		}
 		foreach (var r in resources.Values) {
-			r.calculatePrice (this);
+			r.CalculatePrice (this);
 		}
 	}
 }

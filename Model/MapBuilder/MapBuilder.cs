@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a builder to create a new Map based upon a various settings.
 public class MapBuilder
 {
 	public enum MapType
@@ -22,17 +23,18 @@ public class MapBuilder
 
 	private Cell[,] map;
 
-	private List<Biome> potentialTerrain;
+	private List<Biome> potentialBiomes;
 
 	private System.Random picker;
 
-	public static Cell[,] buildMap (
+	// Builds a new map of Cell objects.
+	public static Cell[,] BuildMap (
 		MapType type, 
 		bool isIsland, 
 		bool isOcean, 
 		int width, 
 		int length, 
-		List<Biome> potentialTerrain)
+		List<Biome> potentialBiomes)
 	{
 		MapBuilder builder = new MapBuilder {
 			type = type,
@@ -41,25 +43,26 @@ public class MapBuilder
 			width = width,
 			length = length,
 			map = new Cell[width, length],
-			potentialTerrain = potentialTerrain,
+			potentialBiomes = potentialBiomes,
 			picker = new System.Random ()
 		};
 
-		float[,] heightMap = HeightMapGenerator.buildHeightMap ("food", width, length);
-		int[,] temperatureMap = builder.generateTemperatures (heightMap);
+		float[,] heightMap = HeightMapGenerator.BuildHeightMap ("food", width, length);
+		int[,] temperatureMap = builder.GenerateTemperatures (heightMap);
 		// do some stuff
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
 				builder.map [i, j] = new Cell (
-					i, j, heightMap [i, j], temperatureMap [i, j], builder.selectTerrain (heightMap [i, j], temperatureMap [i, j]));
+					i, j, heightMap [i, j], temperatureMap [i, j], builder.SelectTerrain (heightMap [i, j], temperatureMap [i, j]));
 			}
 		}
 
 		return builder.map;
 	}
 
-	public static void averageValues (int[,] values)
+	// Averages the values in a 2d array of ints to be similar to their neighbours (smooths the differences between neighbours).
+	public static void AverageValues (int[,] values)
 	{
 		int leftVal, topVal, rightVal, botVal;
 		for (int i = 0; i < values.GetLength (0); i++) {
@@ -74,7 +77,8 @@ public class MapBuilder
 		}
 	}
 
-	public static void averageValues (float[,] values)
+	// Same as above but for floats.
+	public static void AverageValues (float[,] values)
 	{
 		float leftVal, topVal, rightVal, botVal;
 		for (int i = 0; i < values.GetLength (0); i++) {
@@ -89,8 +93,8 @@ public class MapBuilder
 		}
 	}
 
-	// in celcius.
-	private int[,] generateTemperatures (float[,] heights)
+	// Generates a 2d array of temperatures in celcius based on the given heights;.
+	private int[,] GenerateTemperatures (float[,] heights)
 	{
 		int[,] temperatureMap = new int[width, length];
 		int temperatureModifier;
@@ -121,15 +125,16 @@ public class MapBuilder
 				}
 			}
 		}
-		averageValues (temperatureMap);
+		AverageValues (temperatureMap);
 		return temperatureMap;
 	}
 
-	private Biome selectTerrain (float height, int temperature)
+	// Selects a biome for the cell based on the given data.
+	private Biome SelectTerrain (float height, int temperature)
 	{
 		List<Biome> options = new List<Biome> ();
-		foreach (Biome t in potentialTerrain) {
-			if (t.isOption (height, temperature)) {
+		foreach (Biome t in potentialBiomes) {
+			if (t.IsOption (height, temperature)) {
 				options.Add (t);
 			}
 		}
