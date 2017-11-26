@@ -93,7 +93,6 @@ public class MapBuilder
 	private int[,] generateTemperatures (float[,] heights)
 	{
 		int[,] temperatureMap = new int[width, length];
-		float currHeight;
 		int temperatureModifier;
 		switch (type) {
 		case MapType.ALPINE:
@@ -115,25 +114,10 @@ public class MapBuilder
 		}
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
-				currHeight = heights [i, j];
-				if (currHeight > 35) {
-					temperatureMap [i, j] = picker.Next (-20, -5) + temperatureModifier;
-				} else if (currHeight > 30) {
-					temperatureMap [i, j] = picker.Next (-10, 0) + temperatureModifier;
-				} else if (currHeight > 25) {
-					temperatureMap [i, j] = picker.Next (-5, 5) + temperatureModifier;
-				} else if (currHeight > 20) {
-					temperatureMap [i, j] = picker.Next (0, 10) + temperatureModifier;
-				} else if (currHeight > 15) {
-					temperatureMap [i, j] = picker.Next (5, 15) + temperatureModifier;
-				} else if (currHeight > 10) {
-					temperatureMap [i, j] = picker.Next (10, 20) + temperatureModifier;
-				} else if (currHeight > 5) {
-					temperatureMap [i, j] = picker.Next (15, 25) + temperatureModifier;
-				} else if (currHeight > 0) {
-					temperatureMap [i, j] = picker.Next (20, 30) + temperatureModifier;
+				if (heights [i, j] > 0) {
+					temperatureMap [i, j] = (25 - (int)heights [i, j]) + picker.Next (-4, 2) + temperatureModifier;
 				} else {
-					temperatureMap [i, j] = picker.Next (25, 35) + temperatureModifier;
+					temperatureMap [i, j] = 25 + picker.Next (-2, 2) + temperatureModifier;
 				}
 			}
 		}
