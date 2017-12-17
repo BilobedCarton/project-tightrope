@@ -7,6 +7,9 @@ using UnityEngine;
 public class HeightMapGenerator
 {
 	private static System.Random picker = new System.Random ();
+	public static int HD_POWER = 0;
+
+	private int hdCoefficient { get { return (int)Math.Pow (2, HD_POWER); } }
 
 	private string seed;
 	private float[,] heightMap;
@@ -19,8 +22,8 @@ public class HeightMapGenerator
 			seed += "44444";
 		}
 
-		int hdWidth = (width - 1) * 4 + 1;
-		int hdLength = (width - 1) * 4 + 1;
+		int hdWidth = (width - 1) * hdCoefficient + 1;
+		int hdLength = (width - 1) * hdCoefficient + 1;
 
 		this.seed = seed;
 		heightMap = new float[hdWidth, hdLength];
@@ -49,17 +52,18 @@ public class HeightMapGenerator
 
 	private float getAverageOfHDSection (int x, int y)
 	{
-		float[,] hdSection = new float[4, 4];
+		int width = hdCoefficient, length = hdCoefficient;
+		float[,] hdSection = new float[width, length];
 		int dX = 0;
 		int dY = 0;
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < length; j++) {
 				dX = i;
 				dY = j;
-				if (x == (heightMap.GetLength (0) - 1) / 4) {
+				if (x == (heightMap.GetLength (0) - 1) / width) {
 					dX = 0;
 				}
-				if (y == (heightMap.GetLength (1) - 1) / 4) {
+				if (y == (heightMap.GetLength (1) - 1) / length) {
 					dY = 0;
 				}
 				hdSection [i, j] = heightMap [x + dX, x + dY];
@@ -70,7 +74,7 @@ public class HeightMapGenerator
 		foreach (var f in hdSection) {
 			value += f;
 		}
-		return value / 16;
+		return value / width * length;
 	}
 
 	private int GetRandomBump ()
