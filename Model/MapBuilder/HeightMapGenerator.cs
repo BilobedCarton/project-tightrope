@@ -9,8 +9,6 @@ public class HeightMapGenerator
 	private static System.Random picker = new System.Random ();
 
 	private string seed;
-	private int width;
-	private int length;
 	private float[,] heightMap;
 	private int randRange;
 
@@ -21,15 +19,17 @@ public class HeightMapGenerator
 			seed += "44444";
 		}
 
+		int hdWidth = (width - 1) * 4 + 1;
+		int hdLength = (width - 1) * 4 + 1;
+
 		this.seed = seed;
-		this.width = width;
-		this.length = length;
-		heightMap = new float[width, length];
+		heightMap = new float[hdWidth, hdLength];
 		heightMap [0, 0] = seed.ToCharArray () [0] % 20;
-		heightMap [0, width - 1] = seed.ToCharArray () [1] % 20;
-		heightMap [length - 1, 0] = seed.ToCharArray () [2] % 20;
-		heightMap [length - 1, width - 1] = seed.ToCharArray () [3] % 20;
+		heightMap [0, hdWidth - 1] = seed.ToCharArray () [1] % 20;
+		heightMap [hdLength - 1, 0] = seed.ToCharArray () [2] % 20;
+		heightMap [hdLength - 1, hdWidth - 1] = seed.ToCharArray () [3] % 20;
 		randRange = seed.ToCharArray () [4] % 40;
+		this.RunDiamondSquareStep (0, 0, hdWidth - 1, hdLength - 1);
 	}
 
 	// Generate the heights using an implementation of diamond square height map generation.
@@ -37,9 +37,40 @@ public class HeightMapGenerator
 	public static float[,] BuildHeightMap (string seed, int width, int length)
 	{
 		HeightMapGenerator generator = new HeightMapGenerator (seed, width, length);
-		generator.RunDiamondSquareStep (0, 0, width - 1, length - 1);
 		MapBuilder.AverageValues (generator.heightMap);
+		float[,] actualHeightMap = new float[width, length];
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < length; j++) {
+				actualHeightMap [i, j] = generator.getAverageOfHDSection (i, j);
+			}
+		}
 		return generator.heightMap;
+	}
+
+	private float getAverageOfHDSection (int x, int y)
+	{
+		float[,] hdSection = new float[4, 4];
+		int dX = 0;
+		int dY = 0;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				dX = i;
+				dY = j;
+				if (x == (heightMap.GetLength (0) - 1) / 4) {
+					dX = 0;
+				}
+				if (y == (heightMap.GetLength (1) - 1) / 4) {
+					dY = 0;
+				}
+				hdSection [i, j] = heightMap [x + dX, x + dY];
+			}
+		}
+
+		float value = 0;
+		foreach (var f in hdSection) {
+			value += f;
+		}
+		return value / 16;
 	}
 
 	private int GetRandomBump ()
