@@ -6,40 +6,36 @@ using UnityEngine;
 // Represents a factory to create a height map based upon Diamond Square noise generation.
 public class HeightMapGenerator
 {
-	private static System.Random picker = new System.Random ();
 	public static int HD_POWER = 0;
 
 	private int hdCoefficient { get { return (int)Math.Pow (2, HD_POWER); } }
 
+	private System.Random picker;
 	private string seed;
 	private float[,] heightMap;
 	private int randRange;
 
 	// Creates a new HeightMapGenerator with the given seed, width, and length.
-	private HeightMapGenerator (string seed, int width, int length)
+	private HeightMapGenerator (string seed, int width, int length, float[] settings)
 	{
-		if (seed.Length < 5) {
-			seed += "44444";
-		}
-
 		int hdWidth = (width - 1) * hdCoefficient + 1;
 		int hdLength = (width - 1) * hdCoefficient + 1;
+		this.picker = new System.Random (seed.GetHashCode ());
 
-		this.seed = seed;
 		heightMap = new float[hdWidth, hdLength];
-		heightMap [0, 0] = seed.ToCharArray () [0] % 20;
-		heightMap [0, hdWidth - 1] = seed.ToCharArray () [1] % 20;
-		heightMap [hdLength - 1, 0] = seed.ToCharArray () [2] % 20;
-		heightMap [hdLength - 1, hdWidth - 1] = seed.ToCharArray () [3] % 20;
-		randRange = seed.ToCharArray () [4] % 40;
+		heightMap [0, 0] = settings [0];
+		heightMap [0, hdWidth - 1] = settings [1];
+		heightMap [hdLength - 1, 0] = settings [2];
+		heightMap [hdLength - 1, hdWidth - 1] = settings [3];
+		randRange = (int)settings [4];
 		this.RunDiamondSquareStep (0, 0, hdWidth - 1, hdLength - 1);
 	}
 
 	// Generate the heights using an implementation of diamond square height map generation.
 	// Assume width / length are powers of 2 plus 1
-	public static float[,] BuildHeightMap (string seed, int width, int length)
+	public static float[,] BuildHeightMap (string seed, int width, int length, float[] settings)
 	{
-		HeightMapGenerator generator = new HeightMapGenerator (seed, width, length);
+		HeightMapGenerator generator = new HeightMapGenerator (seed, width, length, settings);
 		MapBuilder.AverageValues (generator.heightMap);
 		float[,] actualHeightMap = new float[width, length];
 		for (int i = 0; i < width; i++) {

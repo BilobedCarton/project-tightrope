@@ -21,7 +21,7 @@ public class World
 	private List<Nation> nations;
 
 	// Creates a new World with the given width and length, as well as the given possible Biome types.
-	public World (int width, int length, List<Biome> potentialBiomes)
+	public World (int width, int length, List<Biome> potentialBiomes, string seed, MapBuilder.MapType type)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();
@@ -41,7 +41,7 @@ public class World
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
 
-		this.cells = MapBuilder.BuildMap (MapBuilder.MapType.GRASSLAND, false, false, width, length, potentialBiomes);
+		this.cells = MapBuilder.BuildMap (type, false, false, width, length, potentialBiomes, seed);
 	}
 
 	// Places an instance of the given building in the given location with the given owner.

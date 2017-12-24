@@ -34,7 +34,8 @@ public class MapBuilder
 		bool isOcean, 
 		int width, 
 		int length, 
-		List<Biome> potentialBiomes)
+		List<Biome> potentialBiomes,
+		string seed)
 	{
 		MapBuilder builder = new MapBuilder {
 			type = type,
@@ -47,9 +48,27 @@ public class MapBuilder
 			picker = new System.Random ()
 		};
 
-		float[,] heightMap = HeightMapGenerator.BuildHeightMap ("food", width, length);
+		float[] settings;
+		switch (type) {
+		case MapType.ALPINE:
+			settings = new float[]{ 10, 10, 10, 10, 30 };
+			break;
+		case MapType.GRASSLAND:
+			settings = new float[]{ 0, 0, 0, 0, 10 };
+			break;
+		case MapType.HIGHLANDS:
+			settings = new float[]{ 20, 20, 20, 20, 15 };
+			break;
+		case MapType.ISLAND:
+			settings = new float[]{ -5, -5, -5, -5, 30 };
+			break;
+		default:
+			settings = new float[]{ 0, 0, 0, 0, 50 };
+			break;
+		}
+
+		float[,] heightMap = HeightMapGenerator.BuildHeightMap (seed, width, length, settings);
 		int[,] temperatureMap = builder.GenerateTemperatures (heightMap);
-		// do some stuff
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {

@@ -5,6 +5,11 @@ using UnityEngine;
 // Controls mouse based controls for the user.
 public class MouseController : MonoBehaviour
 {
+	public GameObject selectionBracketPrefab;
+
+	// Selected currently by the user.
+	Cell selected;
+
 	// Relevant for camera movement.
 	Vector3 lastFramePosition;
 	Vector3 currFramePosition;
@@ -22,6 +27,7 @@ public class MouseController : MonoBehaviour
 		currFramePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		currFramePosition.z = 0;
 		UpdateCameraMovement ();
+		UpdateSelection ();
 		lastFramePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		lastFramePosition.z = 0;
 	}
@@ -36,5 +42,19 @@ public class MouseController : MonoBehaviour
 
 		Camera.main.orthographicSize -= Camera.main.orthographicSize * Input.GetAxis ("Mouse ScrollWheel");
 		Camera.main.orthographicSize = Mathf.Clamp (Camera.main.orthographicSize, 3f, 50f);
+	}
+
+	void UpdateSelection ()
+	{
+		if (Input.GetMouseButton (0)) {
+			selected = WorldController.Instance.GetCellDataAtWorldCoord (currFramePosition);
+			if (selected != null) {
+				Vector3 cursorPosition = new Vector3 (selected.X, selected.Y, 0);
+				selectionBracketPrefab.transform.position = cursorPosition;
+				selectionBracketPrefab.SetActive (true);
+			} else {
+				selectionBracketPrefab.SetActive (false);
+			}
+		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 // Controls the world, acts as the medium between Unity and the Model.
 public class WorldController : MonoBehaviour
@@ -14,7 +15,7 @@ public class WorldController : MonoBehaviour
 		TEMPERATURE
 	}
 
-	public static WorldController _instance;
+	public static WorldController Instance;
 
 	private World world;
 
@@ -27,11 +28,11 @@ public class WorldController : MonoBehaviour
 	// Use this for initialization
 	void OnEnable ()
 	{
-		if (_instance != null) {
+		if (Instance != null) {
 			Debug.LogError ("WorldController.OnEnable() -- _instance should be null but isn't.");
 		}
 
-		_instance = this;
+		Instance = this;
 
 		LoadSprites ();
 
@@ -51,7 +52,7 @@ public class WorldController : MonoBehaviour
 	public void GenerateWorld ()
 	{
 		this.DestroyAllCellGameObjects ();
-		this.world = new World (65, 65, BiomeImporter.Import ());
+		this.world = new World (65, 65, BiomeImporter.Import (), DateTime.Now.ToString (), MapBuilder.MapType.ALPINE);
 		this.CreateAllCellGameObjects (this.world);
 		UpdateAllCellGameObjects ();
 	}
@@ -136,5 +137,13 @@ public class WorldController : MonoBehaviour
 		foreach (Sprite s in terrains) {
 			terrainSprites [s.name] = s;
 		}
+	}
+
+	public Cell GetCellDataAtWorldCoord (Vector3 coord)
+	{
+		int x = Mathf.FloorToInt (coord.x + 0.5f);
+		int y = Mathf.FloorToInt (coord.y + 0.5f);
+
+		return this.world.GetCellDataAt (x, y);
 	}
 }
