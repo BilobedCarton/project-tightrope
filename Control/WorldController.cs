@@ -17,6 +17,8 @@ public class WorldController : MonoBehaviour
 
 	public static WorldController Instance;
 
+	public Cell SelectedCell { get; private set; }
+
 	private World world;
 
 	private MapMode mapMode;
@@ -139,11 +141,11 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
-	public Cell GetCellDataAtWorldCoord (Vector3 coord)
+	public void SelectCellDataAtWorldCoord (Vector3 coord)
 	{
 		int x = Mathf.FloorToInt (coord.x + 0.5f);
 		int y = Mathf.FloorToInt (coord.y + 0.5f);
 
-		return this.world.GetCellDataAt (x, y);
+		this.SelectedCell = this.world.GetCellDataAt (x, y);
 	}
 }

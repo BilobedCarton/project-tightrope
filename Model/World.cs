@@ -99,8 +99,8 @@ public class World
 	// Gets the Cell object at the given coordinates.
 	public Cell GetCellDataAt (int x, int y)
 	{
-		if (x >= Width || y >= Length) {
-			Debug.LogError ("World.getCellDataAt(...) -- trying to access cell at non-existent indices.");
+		if (x >= Width || x < 0 || y >= Length || y < 0) {
+			// Debug.Log ("World.getCellDataAt(...) -- trying to access cell at non-existent indices: (" + x + "," + y + ").");
 			return null;
 		} 
 		return cells [x, y];

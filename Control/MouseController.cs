@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Controls mouse based controls for the user.
+// Controls mouse based controls for the user. And some ui stuff too.
 public class MouseController : MonoBehaviour
 {
-	public GameObject selectionBracketPrefab;
-
-	// Selected currently by the user.
-	Cell selected;
+	public static MouseController Instance;
 
 	// Relevant for camera movement.
 	Vector3 lastFramePosition;
 	Vector3 currFramePosition;
 
 	// Use this for initialization
-	void Start ()
+	void OnEnable ()
 	{
-		
+		if (Instance != null) {
+			Debug.LogError ("MouseController.OnEnable() -- Instance should be null but isn't.");
+		}
+		Instance = this;
 	}
 	
 	// Update is called once per frame
@@ -47,14 +47,8 @@ public class MouseController : MonoBehaviour
 	void UpdateSelection ()
 	{
 		if (Input.GetMouseButton (0)) {
-			selected = WorldController.Instance.GetCellDataAtWorldCoord (currFramePosition);
-			if (selected != null) {
-				Vector3 cursorPosition = new Vector3 (selected.X, selected.Y, 0);
-				selectionBracketPrefab.transform.position = cursorPosition;
-				selectionBracketPrefab.SetActive (true);
-			} else {
-				selectionBracketPrefab.SetActive (false);
-			}
+			WorldController.Instance.SelectCellDataAtWorldCoord (currFramePosition);
+			UserInterfaceController.Instance.SetSelectionBracket ();
 		}
 	}
 }
