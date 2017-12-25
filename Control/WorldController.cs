@@ -24,7 +24,9 @@ public class WorldController : MonoBehaviour
 
 	private MapMode mapMode;
 
-	private Dictionary<string, Sprite> terrainSprites;
+	private Dictionary<string, Sprite> importedTerrainSprites;
+
+	private Dictionary<Color, Sprite> createdTerrainSprites;
 
 	private Dictionary<Cell, GameObject> cellGameObjectMap;
 
@@ -122,19 +124,44 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
+	private Sprite CreateCellSprite (Color c)
+	{
+		Texture2D t = new Texture2D (1, 1);
+		t.SetPixels (new Color[] { c });
+		t.wrapMode = TextureWrapMode.Repeat;
+		t.Apply ();
+		Sprite s = Sprite.Create (t, new Rect (0f, 0f, 1f, 1f), new Vector2 (0.5f, 0.5f), 1f);
+		return s;
+	}
+
 	// Load the sprites for procedural objects.
 	private void LoadSprites ()
 	{
-		terrainSprites = new Dictionary<string, Sprite> ();
+		importedTerrainSprites = new Dictionary<string, Sprite> ();
 		Sprite[] terrains = Resources.LoadAll<Sprite> ("Sprites/Terrain/");
 		foreach (Sprite s in terrains) {
-			terrainSprites [s.name] = s;
+			importedTerrainSprites [s.name] = s;
+		}
+
+		createdTerrainSprites = new Dictionary<Color, Sprite> ();
+		Color e;
+		Color t;
+		for (int i = -50; i < 50; i++) {
+			e = new Color (0.5f + i * 0.01f, 0.5f + i * 0.01f, 0.5f + i * 0.01f);
+			t = new Color (0.5f + i * 0.01f, 0.0f, 0.5f - i * 0.01f);
+			createdTerrainSprites [e] = CreateCellSprite (e);
+			createdTerrainSprites [t] = CreateCellSprite (t);
 		}
 	}
 
-	public Sprite GetTerrainSprite (string name)
+	public Sprite GetImportedTerrainSprite (string name)
 	{
-		return terrainSprites [name];
+		return importedTerrainSprites [name];
+	}
+
+	public Sprite GetCreatedTerrainSprite (Color c)
+	{
+		return createdTerrainSprites [c];
 	}
 
 	public void SelectCellDataAtWorldCoord (Vector3 coord)

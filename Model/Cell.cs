@@ -18,9 +18,6 @@ public class Cell
 	public readonly float elevation;
 	public readonly int temperature;
 
-	private Sprite temperatureSprite;
-	private Sprite elevationSprite;
-
 	// TODO add terrain functionality
 
 	// Creates a new Cell object at the given coords with the given data.
@@ -32,9 +29,6 @@ public class Cell
 		this.temperature = temperature;
 		this.Terrain = t;
 		this.NaturalResource = r;
-
-		this.temperatureSprite = GetTemperatureSprite ();
-		this.elevationSprite = GetHeightSprite ();
 	}
 
 	// Converts this cell to a string.
@@ -53,39 +47,29 @@ public class Cell
 	{
 		switch (mapMode) {
 		case WorldController.MapMode.BIOME:
-			return WorldController.Instance.GetTerrainSprite (this.GetSpriteId (WorldController.MapMode.BIOME));
+			return WorldController.Instance.GetImportedTerrainSprite (this.GetSpriteId (WorldController.MapMode.BIOME));
 		case WorldController.MapMode.ELEVATION:
-			return this.elevationSprite;
+			return WorldController.Instance.GetCreatedTerrainSprite (this.GetHeightColor ());
 		case WorldController.MapMode.TEMPERATURE:
-			return this.temperatureSprite;
+			return WorldController.Instance.GetCreatedTerrainSprite (this.GetTemperatureColor ());
 		case WorldController.MapMode.RESOURCE:
-			return WorldController.Instance.GetTerrainSprite (this.GetSpriteId (WorldController.MapMode.RESOURCE));
+			return WorldController.Instance.GetImportedTerrainSprite (this.GetSpriteId (WorldController.MapMode.RESOURCE));
 		default:
 			Debug.LogError ("Cell.GetCellSprite(..) -- unrecognizable map mode");
 			return null;
 		}
 	}
 
-	private Sprite GetHeightSprite ()
+	private Color GetHeightColor ()
 	{
-		Color c = new Color (0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f);
-		return CreateSprite (c);
+		int elevation = (int)Mathf.Floor (this.elevation);
+		return new Color (0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f);
 	}
 
-	private Sprite GetTemperatureSprite ()
+	private Color GetTemperatureColor ()
 	{
-		Color c = new Color (0.5f + temperature * 0.01f, 0.0f, 0.5f - temperature * 0.01f);
-		return CreateSprite (c);
-	}
-
-	private Sprite CreateSprite (Color c)
-	{
-		Texture2D t = new Texture2D (1, 1);
-		t.SetPixels (new Color[] { c });
-		t.wrapMode = TextureWrapMode.Repeat;
-		t.Apply ();
-		Sprite s = Sprite.Create (t, new Rect (0f, 0f, 1f, 1f), new Vector2 (0.5f, 0.5f), 1f);
-		return s;
+		int temperature = (int)Mathf.Floor (this.temperature);
+		return new Color (0.5f + temperature * 0.01f, 0.0f, 0.5f - temperature * 0.01f);
 	}
 
 	// Gets the id of the sprite for the given mapmode that correlates with this cell's data.
