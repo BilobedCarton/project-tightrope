@@ -8,10 +8,10 @@ public class MapBuilder
 {
 	public enum MapType
 	{
-		HIGHLANDS,
 		GRASSLAND,
+		ALPINE,
+		HIGHLANDS,
 		ISLAND,
-		ALPINE
 	}
 
 	private MapType type;
@@ -26,6 +26,23 @@ public class MapBuilder
 	private List<Biome> potentialBiomes;
 
 	private System.Random picker;
+
+	public static MapType ParseStringMapType (string mapType)
+	{
+		switch (mapType) {
+		case "Grassland":
+			return MapType.GRASSLAND;
+		case "Alpine":
+			return MapType.ALPINE;
+		case "Highlands":
+			return MapType.HIGHLANDS;
+		case "Island":
+			return MapType.ISLAND;
+		default:
+			Debug.LogError ("MapBuilder.ParseStringMapType(...) -- Received unexpected string: \"" + mapType + "\"");
+			return MapType.GRASSLAND;
+		}
+	}
 
 	// Builds a new map of Cell objects.
 	public static Cell[,] BuildMap (

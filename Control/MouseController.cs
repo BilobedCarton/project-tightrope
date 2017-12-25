@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // Controls mouse based controls for the user. And some ui stuff too.
 public class MouseController : MonoBehaviour
@@ -46,6 +47,10 @@ public class MouseController : MonoBehaviour
 
 	void UpdateSelection ()
 	{
+		if (EventSystem.current.IsPointerOverGameObject ()) {
+			return;
+		}
+
 		if (Input.GetMouseButton (0)) {
 			WorldController.Instance.SelectCellDataAtWorldCoord (currFramePosition);
 			UserInterfaceController.Instance.SetSelectionBracket ();

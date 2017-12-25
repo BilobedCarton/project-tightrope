@@ -39,9 +39,9 @@ public class WorldController : MonoBehaviour
 		LoadSprites ();
 
 		cellGameObjectMap = new Dictionary<Cell, GameObject> ();
-		mapMode = MapMode.ELEVATION;
+		mapMode = MapMode.BIOME;
 
-		GenerateWorld ();
+		GenerateWorld (null, MapBuilder.MapType.ALPINE);
 	}
 
 	// Update is called once per frame
@@ -51,10 +51,10 @@ public class WorldController : MonoBehaviour
 	}
 
 	// Deletes anything involved in rendering the previous world and generates new instances of involved model objects and game objects.
-	public void GenerateWorld ()
+	public void GenerateWorld (string seed, MapBuilder.MapType type)
 	{
 		this.DestroyAllCellGameObjects ();
-		this.world = new World (65, 65, BiomeImporter.Import (), DateTime.Now.ToString (), MapBuilder.MapType.ALPINE);
+		this.world = new World (65, 65, BiomeImporter.Import (), seed ?? Guid.NewGuid ().ToString ().Replace ("-", string.Empty), type);
 		this.CreateAllCellGameObjects (this.world);
 		UpdateAllCellGameObjects ();
 	}
