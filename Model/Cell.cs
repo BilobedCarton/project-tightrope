@@ -15,8 +15,8 @@ public class Cell
 
 	public Resource NaturalResource { get; private set; }
 
-	private float elevation;
-	private int temperature;
+	public readonly float elevation;
+	public readonly int temperature;
 
 	// TODO add terrain functionality
 

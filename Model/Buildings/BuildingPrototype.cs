@@ -5,7 +5,7 @@ using UnityEngine;
 // Represents a type of building buildable by an IEntity.
 public class BuildingPrototype
 {
-	private string name;
+	public string Name { get; private set; }
 
 	public Dictionary<string, int> ResourcesRequired { get; private set; }
 
@@ -16,7 +16,7 @@ public class BuildingPrototype
 		string name, Dictionary<string, int> resourcesRequired, Dictionary<string, int> resourcesProduced)
 	{
 		BuildingPrototype proto = new BuildingPrototype {
-			name = name,
+			Name = name,
 			ResourcesRequired = resourcesRequired,
 			ChangeInResources = resourcesProduced
 		};

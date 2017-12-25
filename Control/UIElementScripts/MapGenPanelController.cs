@@ -15,14 +15,7 @@ public class MapGenPanelController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		this.isActive = true;
-		this.ToggleModal ();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
+		this.isActive = false;
 	}
 
 	public void ToggleModal ()

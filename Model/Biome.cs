@@ -7,7 +7,8 @@ public class Biome
 {
 	public string Id { get; private set; }
 
-	private string name;
+	public string Name { get; private set; }
+
 	private float buildCostModifier;
 	private float baseMovementModifier;
 	List<string> potentialResources;
@@ -31,7 +32,7 @@ public class Biome
 		List<string> potentialResources = new List<string> (potentialResourcesList.Split (new char[] { '|' }));
 		return new Biome {
 			Id = id,
-			name = name,
+			Name = name,
 			buildCostModifier = buildCostModifier,
 			baseMovementModifier = baseMovementModifier,
 			potentialResources = potentialResources,

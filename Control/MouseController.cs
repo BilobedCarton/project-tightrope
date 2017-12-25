@@ -51,9 +51,10 @@ public class MouseController : MonoBehaviour
 			return;
 		}
 
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButtonUp (0)) {
 			WorldController.Instance.SelectCellDataAtWorldCoord (currFramePosition);
 			UserInterfaceController.Instance.SetSelectionBracket ();
+			TileInfoPanelController.Instance.Toggle ();
 		}
 	}
 }

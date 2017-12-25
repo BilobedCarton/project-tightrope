@@ -40,4 +40,9 @@ public class BuildingInstance
 	{
 		return this.proto.ChangeInResources [name];
 	}
+
+	public string GetName ()
+	{
+		return proto.Name;
+	}
 }
