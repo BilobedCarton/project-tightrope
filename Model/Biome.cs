@@ -28,8 +28,7 @@ public class Biome
 		int lowestTemperature,
 		int highestTemperature)
 	{
-		List<string> potentialResources = new List<string> ();
-		potentialResources = new List<string> (potentialResourcesList.Split (new char[] { ',' }));
+		List<string> potentialResources = new List<string> (potentialResourcesList.Split (new char[] { '|' }));
 		return new Biome {
 			Id = id,
 			name = name,
@@ -50,5 +49,13 @@ public class Biome
 		&& elevation <= highestElevation
 		&& temperature >= lowestTemperature
 		&& temperature <= highestTemperature;
+	}
+
+	public string PickRandomResource (System.Random picker)
+	{
+		if (picker.Next (0, 20) < 2) {
+			return potentialResources [picker.Next (0, potentialResources.Count)];
+		}
+		return "Empty";
 	}
 }

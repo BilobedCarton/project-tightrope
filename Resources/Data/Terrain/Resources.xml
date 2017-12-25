@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceType>
+	<Resource id="0">
+		<name>Iron</name>
+		<baseValue>2.0</baseValue>
+	</Resource>
+	<Resource id="1">
+		<name>Livestock</name>
+		<baseValue>1.8</baseValue>
+	</Resource>
+	<Resource id="2">
+		<name>Lumber</name>
+		<baseValue>1.5</baseValue>
+	</Resource>
+	<Resource id="3">
+		<name>Cotton</name>
+		<baseValue>2.2</baseValue>
+	</Resource>
+</ResourceType>

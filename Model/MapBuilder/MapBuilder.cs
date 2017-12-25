@@ -52,6 +52,7 @@ public class MapBuilder
 		int width, 
 		int length, 
 		List<Biome> potentialBiomes,
+		Dictionary<string, Resource> resources,
 		string seed)
 	{
 		if (seed == null || seed == "") {
@@ -91,10 +92,18 @@ public class MapBuilder
 		float[,] heightMap = HeightMapGenerator.BuildHeightMap (builder.picker, width, length, settings);
 		int[,] temperatureMap = builder.GenerateTemperatures (heightMap);
 
+		Biome terrain;
+		string resource;
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
+				terrain = builder.SelectTerrain (heightMap [i, j], temperatureMap [i, j]);
+				resource = terrain.PickRandomResource (builder.picker);
+				if (resources.ContainsKey (resource) == false) {
+					Debug.LogError ("MapBuilder.BuildMap(...) -- Trying to place non-existent resource type.");
+					return null;
+				}
 				builder.map [i, j] = new Cell (
-					i, j, heightMap [i, j], temperatureMap [i, j], builder.SelectTerrain (heightMap [i, j], temperatureMap [i, j]));
+					i, j, heightMap [i, j], temperatureMap [i, j], terrain, resources [resource]);
 			}
 		}
 

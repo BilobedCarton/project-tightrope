@@ -4,7 +4,7 @@
 		<name>ColdFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Lumber</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
@@ -14,7 +14,7 @@
 		<name>ColdBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Iron</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
@@ -24,7 +24,7 @@
 		<name>ColdTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Iron</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
@@ -34,7 +34,7 @@
 		<name>EvenFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Livestock|Lumber</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
@@ -44,7 +44,7 @@
 		<name>EvenBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Iron|Livestock</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
@@ -54,7 +54,7 @@
 		<name>EvenTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Iron</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
@@ -64,7 +64,7 @@
 		<name>WarmFlat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Cotton|Livestock|Lumber</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
@@ -74,7 +74,7 @@
 		<name>WarmBumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Livestock</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
@@ -84,7 +84,7 @@
 		<name>WarmTall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources></potentialResources>
+		<potentialResources>Iron</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>15</lowestTemperature>

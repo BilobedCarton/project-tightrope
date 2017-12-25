@@ -5,15 +5,19 @@ using UnityEngine;
 // Represents a resource existing in the world somewhere.
 public class Resource
 {
-	private string name;
+	public string Id { get; private set; }
+
+	public  string Name { get; private set; }
+
 	private readonly float baseValue;
 
 	public float Price { get; private set; }
 
 	// Creates a new type of resource with the given name and base value.
-	public Resource (string name, float baseValue)
+	public Resource (string id, string name, float baseValue)
 	{
-		this.name = name;
+		this.Id = id;
+		this.Name = name;
 		this.baseValue = baseValue;
 	}
 
@@ -22,8 +26,8 @@ public class Resource
 	public void CalculatePrice (World world)
 	{
 		// Calculate based on supply, demand, and baseValue
-		float worldStockpile = world.GetWorldStockpile (this.name);
-		float changeInStockpile = world.GetNextStockpileChange (this.name);
+		float worldStockpile = world.GetWorldStockpile (this.Name);
+		float changeInStockpile = world.GetNextStockpileChange (this.Name);
 
 		if (changeInStockpile / worldStockpile < 0.95f) {
 			this.Price = baseValue - ((changeInStockpile / worldStockpile) * baseValue);

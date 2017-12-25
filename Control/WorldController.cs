@@ -12,7 +12,8 @@ public class WorldController : MonoBehaviour
 	{
 		BIOME,
 		ELEVATION,
-		TEMPERATURE
+		TEMPERATURE,
+		RESOURCE
 	}
 
 	public static WorldController Instance;
@@ -54,7 +55,7 @@ public class WorldController : MonoBehaviour
 	public void GenerateWorld (string seed, MapBuilder.MapType type)
 	{
 		this.DestroyAllCellGameObjects ();
-		this.world = new World (65, 65, BiomeImporter.Import (), seed, type);
+		this.world = new World (65, 65, BiomeImporter.Import (), ResourceImporter.Import (), seed, type);
 		this.CreateAllCellGameObjects (this.world);
 		UpdateAllCellGameObjects ();
 	}
@@ -71,6 +72,9 @@ public class WorldController : MonoBehaviour
 			break;
 		case "TEMPERATURE":
 			mapMode = MapMode.TEMPERATURE;
+			break;
+		case "RESOURCE":
+			mapMode = MapMode.RESOURCE;
 			break;
 		}
 
@@ -90,6 +94,9 @@ public class WorldController : MonoBehaviour
 			break;
 		case MapMode.TEMPERATURE:
 			idPrefix += "Temperature_";
+			break;
+		case MapMode.RESOURCE:
+			idPrefix += "Resource_";
 			break;
 		}
 

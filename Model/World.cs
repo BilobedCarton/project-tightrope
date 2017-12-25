@@ -21,7 +21,7 @@ public class World
 	private List<Nation> nations;
 
 	// Creates a new World with the given width and length, as well as the given possible Biome types.
-	public World (int width, int length, List<Biome> potentialBiomes, string seed, MapBuilder.MapType type)
+	public World (int width, int length, List<Biome> potentialBiomes, List<Resource> resources, string seed, MapBuilder.MapType type)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();
@@ -32,6 +32,10 @@ public class World
 
 		this.buildingPrototypes = new Dictionary<string, BuildingPrototype> ();
 		this.resources = new Dictionary<string, Resource> ();
+		foreach (Resource r in resources) {
+			this.resources.Add (r.Name, r);
+		}
+		this.resources.Add ("Empty", null); 
 
 		List<string> resourceNames = new List<string> ();
 		foreach (var resourceName in this.resources.Keys) {
@@ -41,7 +45,7 @@ public class World
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
 
-		this.cells = MapBuilder.BuildMap (type, false, false, width, length, potentialBiomes, seed);
+		this.cells = MapBuilder.BuildMap (type, false, false, width, length, potentialBiomes, this.resources, seed);
 	}
 
 	// Places an instance of the given building in the given location with the given owner.

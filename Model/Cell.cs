@@ -13,19 +13,22 @@ public class Cell
 
 	public Biome Terrain { get; private set; }
 
+	public Resource NaturalResource { get; private set; }
+
 	private float elevation;
 	private int temperature;
 
 	// TODO add terrain functionality
 
 	// Creates a new Cell object at the given coords with the given data.
-	public Cell (int x, int y, float elevation, int temperature, Biome t)
+	public Cell (int x, int y, float elevation, int temperature, Biome t, Resource r = null)
 	{
 		this.X = x;
 		this.Y = y;
 		this.elevation = elevation;
 		this.temperature = temperature;
 		this.Terrain = t;
+		this.NaturalResource = r;
 	}
 
 	// Converts this cell to a string.
@@ -50,6 +53,8 @@ public class Cell
 			return this.GetElevationId ();
 		case WorldController.MapMode.TEMPERATURE:
 			return this.GetTemperatureId ();
+		case WorldController.MapMode.RESOURCE:
+			return this.NaturalResource != null ? this.NaturalResource.Id : "Empty";
 		default:
 			Debug.LogError ("Cell.getSpriteId(..) -- unrecognizable map mode");
 			return "";
