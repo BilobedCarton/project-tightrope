@@ -18,6 +18,9 @@ public class Cell
 	public readonly float elevation;
 	public readonly int temperature;
 
+	private Sprite temperatureSprite;
+	private Sprite elevationSprite;
+
 	// TODO add terrain functionality
 
 	// Creates a new Cell object at the given coords with the given data.
@@ -29,6 +32,9 @@ public class Cell
 		this.temperature = temperature;
 		this.Terrain = t;
 		this.NaturalResource = r;
+
+		this.temperatureSprite = GetTemperatureSprite ();
+		this.elevationSprite = GetHeightSprite ();
 	}
 
 	// Converts this cell to a string.
@@ -43,65 +49,57 @@ public class Cell
 		this.Building = proto.BuildInstance (this, owner);
 	}
 
-	// Gets the id of the sprite for the given mapmode that correlates with this cell's data.
-	public string GetSpriteId (WorldController.MapMode mapMode)
+	public Sprite GetCellSprite (WorldController.MapMode mapMode)
 	{
 		switch (mapMode) {
 		case WorldController.MapMode.BIOME:
-			return this.Terrain.Id;
+			return WorldController.Instance.GetTerrainSprite (this.GetSpriteId (WorldController.MapMode.BIOME));
 		case WorldController.MapMode.ELEVATION:
-			return this.GetElevationId ();
+			return this.elevationSprite;
 		case WorldController.MapMode.TEMPERATURE:
-			return this.GetTemperatureId ();
+			return this.temperatureSprite;
 		case WorldController.MapMode.RESOURCE:
-			return this.NaturalResource != null ? this.NaturalResource.Id : "Empty";
+			return WorldController.Instance.GetTerrainSprite (this.GetSpriteId (WorldController.MapMode.RESOURCE));
 		default:
-			Debug.LogError ("Cell.getSpriteId(..) -- unrecognizable map mode");
+			Debug.LogError ("Cell.GetCellSprite(..) -- unrecognizable map mode");
+			return null;
+		}
+	}
+
+	private Sprite GetHeightSprite ()
+	{
+		Color c = new Color (0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f);
+		return CreateSprite (c);
+	}
+
+	private Sprite GetTemperatureSprite ()
+	{
+		Color c = new Color (0.5f + temperature * 0.01f, 0.0f, 0.5f - temperature * 0.01f);
+		return CreateSprite (c);
+	}
+
+	private Sprite CreateSprite (Color c)
+	{
+		Texture2D t = new Texture2D (1, 1);
+		t.SetPixels (new Color[] { c });
+		t.wrapMode = TextureWrapMode.Repeat;
+		t.Apply ();
+		Sprite s = Sprite.Create (t, new Rect (0f, 0f, 1f, 1f), new Vector2 (0.5f, 0.5f), 1f);
+		return s;
+	}
+
+	// Gets the id of the sprite for the given mapmode that correlates with this cell's data.
+	private string GetSpriteId (WorldController.MapMode mapMode)
+	{
+		switch (mapMode) {
+		case WorldController.MapMode.BIOME:
+			return "Terrain_Biome_" + this.Terrain.Id;
+		case WorldController.MapMode.RESOURCE:
+			string naturalResourceId = this.NaturalResource != null ? this.NaturalResource.Id : "Empty";
+			return "Terrain_Resource_" + naturalResourceId;
+		default:
+			Debug.LogError ("Cell.getSpriteId(..) -- invalid map mode");
 			return "";
-		}
-	}
-
-	// Gets the id of this cell for an Elevation map display.
-	private string GetElevationId ()
-	{
-		if (elevation < 0) {
-			return "0";
-		} else if (elevation < 5) {
-			return "1";
-		} else if (elevation < 10) {
-			return "2";
-		} else if (elevation < 15) {
-			return "3";
-		} else if (elevation < 20) {
-			return "4";
-		} else if (elevation < 25) {
-			return "5";
-		} else if (elevation < 30) {
-			return "6";
-		} else {
-			return "7";
-		}
-	}
-
-	// Gets the id of this cell for a Temperature map display.
-	private string GetTemperatureId ()
-	{
-		if (temperature < -10) {
-			return "0";
-		} else if (temperature < 0) {
-			return "1";
-		} else if (temperature < 6) {
-			return "2";
-		} else if (temperature < 14) {
-			return "3";
-		} else if (temperature < 22) {
-			return "4";
-		} else if (temperature < 30) {
-			return "5";
-		} else if (temperature < 35) {
-			return "6";
-		} else {
-			return "7";
 		}
 	}
 }

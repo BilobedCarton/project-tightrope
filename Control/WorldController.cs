@@ -84,25 +84,9 @@ public class WorldController : MonoBehaviour
 	// Update the cell's sprites based on map mode.
 	private void UpdateAllCellGameObjects ()
 	{
-		string idPrefix = "Terrain_";
-		switch (mapMode) {
-		case MapMode.BIOME:
-			idPrefix += "Biome_";
-			break;
-		case MapMode.ELEVATION:
-			idPrefix += "Height_";
-			break;
-		case MapMode.TEMPERATURE:
-			idPrefix += "Temperature_";
-			break;
-		case MapMode.RESOURCE:
-			idPrefix += "Resource_";
-			break;
-		}
-
 		foreach (Cell cell_data in cellGameObjectMap.Keys) {
 			GameObject cell_go = cellGameObjectMap [cell_data];
-			cell_go.GetComponent <SpriteRenderer> ().sprite = terrainSprites [idPrefix + cell_data.GetSpriteId (mapMode)];
+			cell_go.GetComponent <SpriteRenderer> ().sprite = cell_data.GetCellSprite (this.mapMode);
 		}
 	}
 
@@ -146,6 +130,11 @@ public class WorldController : MonoBehaviour
 		foreach (Sprite s in terrains) {
 			terrainSprites [s.name] = s;
 		}
+	}
+
+	public Sprite GetTerrainSprite (string name)
+	{
+		return terrainSprites [name];
 	}
 
 	public void SelectCellDataAtWorldCoord (Vector3 coord)
