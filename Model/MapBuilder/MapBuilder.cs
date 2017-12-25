@@ -54,6 +54,10 @@ public class MapBuilder
 		List<Biome> potentialBiomes,
 		string seed)
 	{
+		if (seed == null || seed == "") {
+			seed = GetNewRandomSeed ();
+		}
+
 		MapBuilder builder = new MapBuilder {
 			type = type,
 			isIsland = isIsland,
@@ -62,7 +66,7 @@ public class MapBuilder
 			length = length,
 			map = new Cell[width, length],
 			potentialBiomes = potentialBiomes,
-			picker = new System.Random ()
+			picker = new System.Random (seed.GetHashCode ())
 		};
 
 		float[] settings;
@@ -71,7 +75,7 @@ public class MapBuilder
 			settings = new float[]{ 10, 10, 10, 10, 30 };
 			break;
 		case MapType.GRASSLAND:
-			settings = new float[]{ 0, 0, 0, 0, 10 };
+			settings = new float[]{ 0, 0, 0, 0, 7 };
 			break;
 		case MapType.HIGHLANDS:
 			settings = new float[]{ 20, 20, 20, 20, 15 };
@@ -84,7 +88,7 @@ public class MapBuilder
 			break;
 		}
 
-		float[,] heightMap = HeightMapGenerator.BuildHeightMap (seed, width, length, settings);
+		float[,] heightMap = HeightMapGenerator.BuildHeightMap (builder.picker, width, length, settings);
 		int[,] temperatureMap = builder.GenerateTemperatures (heightMap);
 
 		for (int i = 0; i < width; i++) {
@@ -182,5 +186,16 @@ public class MapBuilder
 		}
 
 		return options [picker.Next (0, options.Count)];
+	}
+
+	private static string GetNewRandomSeed ()
+	{
+		string characters = "abcdefghijklmnopqrstuvwxyz1234567890";
+		System.Random charPicker = new System.Random ();
+		string seed = "";
+		while (seed.Length < 15) {
+			seed += characters [charPicker.Next (0, 35)];
+		}
+		return seed;
 	}
 }

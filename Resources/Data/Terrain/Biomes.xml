@@ -5,7 +5,7 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>-40</lowestElevation>
+		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
@@ -26,7 +26,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>40</highestElevation>
+		<highestElevation>45</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Biome>
@@ -35,7 +35,7 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>-40</lowestElevation>
+		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
@@ -56,7 +56,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>40</highestElevation>
+		<highestElevation>45</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Biome>
@@ -65,7 +65,7 @@
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
-		<lowestElevation>-40</lowestElevation>
+		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
@@ -86,7 +86,7 @@
 		<baseMovementModifier>1.0</baseMovementModifier>
 		<potentialResources></potentialResources>
 		<lowestElevation>11</lowestElevation>
-		<highestElevation>40</highestElevation>
+		<highestElevation>45</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Biome>

@@ -2236,7 +2236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChildHeight: 25
-  ChildWidth: 90
+  ChildWidth: 50
 --- !u!1 &1503525693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,7 +3193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2119792928
 RectTransform:
   m_ObjectHideFlags: 0

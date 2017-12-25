@@ -16,11 +16,11 @@ public class HeightMapGenerator
 	private int randRange;
 
 	// Creates a new HeightMapGenerator with the given seed, width, and length.
-	private HeightMapGenerator (string seed, int width, int length, float[] settings)
+	private HeightMapGenerator (System.Random picker, int width, int length, float[] settings)
 	{
 		int hdWidth = (width - 1) * hdCoefficient + 1;
 		int hdLength = (width - 1) * hdCoefficient + 1;
-		this.picker = new System.Random (seed.GetHashCode ());
+		this.picker = picker;
 
 		heightMap = new float[hdWidth, hdLength];
 		heightMap [0, 0] = settings [0];
@@ -33,9 +33,9 @@ public class HeightMapGenerator
 
 	// Generate the heights using an implementation of diamond square height map generation.
 	// Assume width / length are powers of 2 plus 1
-	public static float[,] BuildHeightMap (string seed, int width, int length, float[] settings)
+	public static float[,] BuildHeightMap (System.Random picker, int width, int length, float[] settings)
 	{
-		HeightMapGenerator generator = new HeightMapGenerator (seed, width, length, settings);
+		HeightMapGenerator generator = new HeightMapGenerator (picker, width, length, settings);
 		MapBuilder.AverageValues (generator.heightMap);
 		float[,] actualHeightMap = new float[width, length];
 		for (int i = 0; i < width; i++) {
