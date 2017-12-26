@@ -15,8 +15,9 @@ public class MapGenPanelController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		this.isActive = true;
-		this.ToggleModal ();
+		this.isActive = false;
+		ToggleModal ();
+		ToggleModal ();
 	}
 
 	public void ToggleModal ()
