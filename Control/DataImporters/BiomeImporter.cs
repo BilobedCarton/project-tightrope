@@ -27,6 +27,7 @@ public static class BiomeImporter
 				int.Parse (n.ChildNodes [6].InnerText), int.Parse (n.ChildNodes [7].InnerText)));
 		}
 
+		fs.Close ();
 		return terrainTypes;
 	}
 }

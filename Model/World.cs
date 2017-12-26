@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml;
 
 // Represents a model of the world of this game.
 public class World
@@ -118,6 +119,45 @@ public class World
 		}
 		foreach (var r in resources.Values) {
 			r.CalculatePrice (this);
+		}
+	}
+
+	///////////////////////////////////////////////////////////////
+	/// SAVING AND LOADING
+	///////////////////////////////////////////////////////////////
+
+	public void Save (XmlWriter writer)
+	{
+		writer.WriteStartElement ("World");
+		writer.WriteAttributeString ("width", this.Width.ToString ());
+		writer.WriteAttributeString ("length", this.Length.ToString ());
+		foreach (Cell c in this.cells) {
+			c.Save (writer);
+		}
+		writer.WriteEndElement ();
+	}
+
+	public void Load (XmlElement worldElement)
+	{
+		this.Width = int.Parse (worldElement.GetAttribute ("width"));
+		this.Length = int.Parse (worldElement.GetAttribute ("length"));
+		this.cells = new Cell[this.Width, this.Length];
+		this.buildings = new List<BuildingInstance> ();
+		this.districts = new List<District> ();
+
+		Dictionary<string, Biome> biomes = new Dictionary<string, Biome> ();
+		foreach (Biome b in BiomeImporter.Import ()) {
+			biomes.Add (b.Id, b);
+		}
+		Dictionary<string, Resource> resources = new Dictionary<string, Resource> ();
+		foreach (Resource r in ResourceImporter.Import ()) {
+			resources.Add (r.Id, r);
+		}
+
+		XmlNodeList cellElements = worldElement.GetElementsByTagName ("Cell");
+		foreach (XmlElement cellElement in cellElements) {
+			Cell c = Cell.Load (cellElement, biomes, resources);
+			this.cells [c.X, c.Y] = c;
 		}
 	}
 }

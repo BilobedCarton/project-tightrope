@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml;
 
 // Represents a square on a map, or a cell.
 public class Cell
@@ -85,5 +86,36 @@ public class Cell
 			Debug.LogError ("Cell.getSpriteId(..) -- invalid map mode");
 			return "";
 		}
+	}
+
+	///////////////////////////////////////////////////////////////
+	/// SAVING AND LOADING
+	///////////////////////////////////////////////////////////////
+
+	public void Save (XmlWriter writer)
+	{
+		writer.WriteStartElement ("Cell");
+		writer.WriteAttributeString ("x", this.X.ToString ());
+		writer.WriteAttributeString ("y", this.Y.ToString ());
+		writer.WriteAttributeString ("elevation", this.elevation.ToString ());
+		writer.WriteAttributeString ("temperature", this.temperature.ToString ());
+		writer.WriteElementString ("TerrainId", this.Terrain != null ? this.Terrain.Id : "");
+		writer.WriteElementString ("ResourceId", this.NaturalResource != null ? this.NaturalResource.Id : "");
+		writer.WriteElementString ("Building", this.Building != null ? this.Building.GetName () : "");
+		writer.WriteEndElement ();
+	}
+
+	public static Cell Load (XmlElement cellElement, Dictionary<string, Biome> biomes, Dictionary<string, Resource> resources)
+	{
+		Cell c = new Cell (
+			         int.Parse (cellElement.GetAttribute ("x")), 
+			         int.Parse (cellElement.GetAttribute ("y")),
+			         float.Parse (cellElement.GetAttribute ("elevation")),
+			         int.Parse (cellElement.GetAttribute ("temperature")),
+			         biomes [cellElement.FirstChild.InnerText]);
+		if (cellElement.ChildNodes [1].InnerXml.Equals ("") == false) {
+			c.NaturalResource = resources [cellElement.ChildNodes [1].InnerXml];
+		}
+		return c;
 	}
 }

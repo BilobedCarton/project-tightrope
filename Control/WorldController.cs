@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using System.Xml;
+using System.IO;
 
 // Controls the world, acts as the medium between Unity and the Model.
 public class WorldController : MonoBehaviour
@@ -170,5 +172,30 @@ public class WorldController : MonoBehaviour
 		int y = Mathf.FloorToInt (coord.y + 0.5f);
 
 		this.SelectedCell = this.world.GetCellDataAt (x, y);
+	}
+
+	///////////////////////////////////////////////////////////////
+	/// SAVING AND LOADING
+	///////////////////////////////////////////////////////////////
+
+	public void Save (string fileName)
+	{
+		XmlWriter writer = new XmlTextWriter ("Assets/Resources/Data/Saves/" + fileName + ".xml", System.Text.ASCIIEncoding.ASCII);
+		writer.WriteRaw ("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+		this.world.Save (writer);
+		writer.Close ();
+	}
+
+	public void Load (string fileName)
+	{
+		FileStream fs = new FileStream ("Assets/Resources/Data/Saves/" + fileName + ".xml", FileMode.Open, FileAccess.Read);
+		XmlDocument doc = new XmlDocument ();
+		doc.Load (fs);
+		XmlElement worldElement = (XmlElement)doc.GetElementsByTagName ("World") [0];
+		this.world.Load (worldElement);
+		this.DestroyAllCellGameObjects ();
+		this.CreateAllCellGameObjects (this.world);
+		this.UpdateAllCellGameObjects ();
+		fs.Close ();
 	}
 }
