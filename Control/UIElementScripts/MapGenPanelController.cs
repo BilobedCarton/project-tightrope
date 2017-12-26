@@ -10,12 +10,13 @@ public class MapGenPanelController : MonoBehaviour
 	public UnityEngine.UI.InputField SeedInputField;
 	public UnityEngine.UI.Dropdown MapTypeDropdown;
 
-	private bool isActive;
+	public bool isActive;
 
 	// Use this for initialization
 	void Start ()
 	{
-		this.isActive = false;
+		this.isActive = true;
+		this.ToggleModal ();
 	}
 
 	public void ToggleModal ()
@@ -27,6 +28,7 @@ public class MapGenPanelController : MonoBehaviour
 	public void GenerateMap ()
 	{
 		WorldController.Instance.GenerateWorld (seed, type);
+		this.ToggleModal ();
 	}
 
 	public void SetSeed ()
