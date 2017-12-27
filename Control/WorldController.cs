@@ -174,6 +174,12 @@ public class WorldController : MonoBehaviour
 		this.SelectedCell = this.world.GetCellDataAt (x, y);
 	}
 
+	public void Exit ()
+	{
+		this.DestroyAllCellGameObjects ();
+		Application.Quit ();
+	}
+
 	///////////////////////////////////////////////////////////////
 	/// SAVING AND LOADING
 	///////////////////////////////////////////////////////////////
