@@ -6,7 +6,7 @@ using UnityEngine;
 // Represents a factory to create a height map based upon Diamond Square noise generation.
 public class HeightMapGenerator
 {
-	public static int HD_POWER = 0;
+	public static int HD_POWER = 1;
 
 	private int hdCoefficient { get { return (int)Math.Pow (2, HD_POWER); } }
 
@@ -70,17 +70,13 @@ public class HeightMapGenerator
 		foreach (var f in hdSection) {
 			value += f;
 		}
-		return value / width * length;
+		return value / (width * length);
 	}
 
-	private int GetRandomBump ()
+	private int GetRandomBump (int x0, int y0, int x1, int y1)
 	{
-		return picker.Next (-randRange, randRange);
-	}
-
-	private void ReduceRandRange ()
-	{
-		randRange /= 2;
+		int range = randRange * (((x1 - x0) * (y1 - y0)) / (heightMap.GetLength (0) * heightMap.GetLength (1))) + 5;
+		return picker.Next (-range, range);
 	}
 
 	private void RunDiamondSquareStep (int x0, int y0, int x1, int y1)
@@ -90,7 +86,7 @@ public class HeightMapGenerator
 		// diamond step
 		heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)] = 
 			((heightMap [x0, y0] + heightMap [x1, y0] + heightMap [x1, y1] + heightMap [x0, y1]) / 4)
-		+ GetRandomBump ();
+		+ GetRandomBump (x0, y0, x1, y1);
 
 		// square step
 		if (x0 == 0) {
@@ -98,13 +94,13 @@ public class HeightMapGenerator
 			+ heightMap [x1 / 2, GetMidpoint (y0, y1)]
 			+ heightMap [0, y1]
 			+ heightMap [(heightMap.GetLength (0) - 1) - (x1 / 2), GetMidpoint (y0, y1)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		} else {
 			heightMap [x0, GetMidpoint (y0, y1)] = ((heightMap [x0, y0]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x0, y1]
 			+ heightMap [GetMidpoint (x0 - x1, x0), (y1 - y0) / 2]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		}
 
 		if (y0 == 0) {
@@ -112,13 +108,13 @@ public class HeightMapGenerator
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, 0]
 			+ heightMap [GetMidpoint (x0, x1), (heightMap.GetLength (1) - 1) - (y1 / 2)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		} else {
 			heightMap [GetMidpoint (x0, x1), y0] = ((heightMap [x0, y0]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, y0]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0 - y1, y0)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		}
 
 		if (x1 == heightMap.GetLength (0) - 1) {
@@ -126,13 +122,13 @@ public class HeightMapGenerator
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
 			+ heightMap [x1 - x0 / 2, GetMidpoint (y0, y1)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		} else {
 			heightMap [x1, GetMidpoint (y0, y1)] = ((heightMap [x1, y0]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
 			+ heightMap [GetMidpoint (x1, (2 * x1) - x0), GetMidpoint (y0, y1)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		}
 
 		if (y1 == heightMap.GetLength (1) - 1) {
@@ -140,19 +136,18 @@ public class HeightMapGenerator
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
 			+ heightMap [GetMidpoint (x0, x1), (y1 - y0) / 2]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		} else {
 			heightMap [GetMidpoint (x0, x1), y1] = ((heightMap [x0, y1]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y0, y1)]
 			+ heightMap [x1, y1]
 			+ heightMap [GetMidpoint (x0, x1), GetMidpoint (y1, (2 * y1) - y0)]) / 4)
-			+ GetRandomBump ();
+			+ GetRandomBump (x0, y0, x1, y1);
 		}
 		if (x1 - x0 == 2 || y1 - y0 == 2) {
 			return;
 		} 
 
-		ReduceRandRange ();
 		// Run the steps on the subdivided squares
 		RunDiamondSquareStep (x0, y0, GetMidpoint (x0, x1), GetMidpoint (y0, y1));
 		RunDiamondSquareStep (GetMidpoint (x0, x1), y0, x1, GetMidpoint (y0, y1));

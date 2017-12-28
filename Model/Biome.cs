@@ -54,7 +54,7 @@ public class Biome
 
 	public string PickRandomResource (System.Random picker)
 	{
-		if (picker.Next (0, 20) < 2) {
+		if (picker.Next (0, 25) < 1) {
 			return potentialResources [picker.Next (0, potentialResources.Count)];
 		}
 		return "Empty";

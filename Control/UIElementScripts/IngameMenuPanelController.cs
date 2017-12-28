@@ -17,8 +17,7 @@ public class IngameMenuPanelController : MonoBehaviour
 
 		Instance = this;
 
-		this.isActive = true;
-		this.Toggle ();
+		this.isActive = false;
 	}
 
 	public void Toggle ()
