@@ -17,7 +17,6 @@ public class MapGenPanelController : MonoBehaviour
 	{
 		this.isActive = false;
 		ToggleModal ();
-		ToggleModal ();
 	}
 
 	public void ToggleModal ()

@@ -21,7 +21,7 @@ public class UserInterfaceController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		UpdateMainMenuEscPress ();
 	}
 
 	public void SetSelectionBracket ()
@@ -32,6 +32,13 @@ public class UserInterfaceController : MonoBehaviour
 			this.SelectionBracketPrefab.SetActive (true);
 		} else {
 			this.SelectionBracketPrefab.SetActive (false);
+		}
+	}
+
+	private void UpdateMainMenuEscPress ()
+	{
+		if (Input.GetButtonUp ("Escape") == true) {
+			IngameMenuPanelController.Instance.Toggle ();
 		}
 	}
 }
