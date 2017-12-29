@@ -22,6 +22,8 @@ public class WorldController : MonoBehaviour
 
 	public Cell SelectedCell { get; private set; }
 
+	public MapBuilder.MapType mapType;
+
 	private World world;
 
 	private MapMode mapMode;
@@ -47,6 +49,7 @@ public class WorldController : MonoBehaviour
 		mapMode = MapMode.BIOME;
 
 		GenerateWorld (null, MapBuilder.MapType.ALPINE);
+		this.mapType = mapType;
 	}
 
 	// Update is called once per frame

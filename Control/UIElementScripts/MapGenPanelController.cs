@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapGenPanelController : MonoBehaviour
 {
 	public string seed = null;
-	public MapBuilder.MapType type = MapBuilder.MapType.ALPINE;
+	public MapBuilder.MapType type = 0;
 
 	public UnityEngine.UI.InputField SeedInputField;
 	public UnityEngine.UI.Dropdown MapTypeDropdown;
@@ -27,6 +27,8 @@ public class MapGenPanelController : MonoBehaviour
 
 	public void GenerateMap ()
 	{
+		this.SetSeed ();
+		this.SetMapType ();
 		WorldController.Instance.GenerateWorld (seed, type);
 		this.ToggleModal ();
 	}

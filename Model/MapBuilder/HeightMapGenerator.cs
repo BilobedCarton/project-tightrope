@@ -75,7 +75,7 @@ public class HeightMapGenerator
 
 	private int GetRandomBump (int x0, int y0, int x1, int y1)
 	{
-		int range = randRange * (((x1 - x0) * (y1 - y0)) / (heightMap.GetLength (0) * heightMap.GetLength (1))) + 5;
+		int range = randRange * (((x1 - x0) * (y1 - y0)) / (heightMap.GetLength (0) * heightMap.GetLength (1))) + 10;
 		return picker.Next (-range, range);
 	}
 
