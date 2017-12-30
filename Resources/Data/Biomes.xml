@@ -1,90 +1,112 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <BiomeType>
-	<Biome id="0">
-		<name>ColdFlat</name>
+	<Biome id="ColdFlat">
+		<name>Cold Flat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Lumber</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+		</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Biome>
-	<Biome id="1">
-		<name>ColdBumpy</name>
+	<Biome id="ColdBumpy">
+		<name>Cold Bumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Iron</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+		</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Biome>
-	<Biome id="2">
-		<name>ColdTall</name>
+	<Biome id="ColdTall">
+		<name>Cold Tall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Iron</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+		</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>-100</lowestTemperature>
 		<highestTemperature>-5</highestTemperature>
 	</Biome>
-	<Biome id="3">
-		<name>EvenFlat</name>
+	<Biome id="EvenFlat">
+		<name>Even Flat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Livestock|Lumber</potentialResources>
+		<potentialResources>
+			<resource id="livestock"></resource>
+			<resource id="lumber"></resource>
+		</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Biome>
-	<Biome id="4">
-		<name>EvenBumpy</name>
+	<Biome id="EvenBumpy">
+		<name>Even Bumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Iron|Livestock</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+			<resource id="livestock"></resource>
+		</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Biome>
-	<Biome id="5">
-		<name>EvenTall</name>
+	<Biome id="EvenTall">
+		<name>Even Tall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Iron</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+		</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>-5</lowestTemperature>
 		<highestTemperature>15</highestTemperature>
 	</Biome>
-	<Biome id="6">
-		<name>WarmFlat</name>
+	<Biome id="WarmFlat">
+		<name>Warm Flat</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Cotton|Livestock|Lumber</potentialResources>
+		<potentialResources>
+			<resource id="livestock"></resource>
+			<resource id="lumber"></resource>
+			<resource id="cotton"></resource>
+		</potentialResources>
 		<lowestElevation>-45</lowestElevation>
 		<highestElevation>5</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Biome>
-	<Biome id="7">
-		<name>WarmBumpy</name>
+	<Biome id="WarmBumpy">
+		<name>Warm Bumpy</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Livestock</potentialResources>
+		<potentialResources>
+			<resource id="livestock"></resource>
+			</potentialResources>
 		<lowestElevation>5</lowestElevation>
 		<highestElevation>12</highestElevation>
 		<lowestTemperature>15</lowestTemperature>
 		<highestTemperature>40</highestTemperature>
 	</Biome>
-	<Biome id="8">
-		<name>WarmTall</name>
+	<Biome id="WarmTall">
+		<name>Warm Tall</name>
 		<buildCostModifier>1.0</buildCostModifier>
 		<baseMovementModifier>1.0</baseMovementModifier>
-		<potentialResources>Iron</potentialResources>
+		<potentialResources>
+			<resource id="iron"></resource>
+		</potentialResources>
 		<lowestElevation>11</lowestElevation>
 		<highestElevation>45</highestElevation>
 		<lowestTemperature>15</lowestTemperature>

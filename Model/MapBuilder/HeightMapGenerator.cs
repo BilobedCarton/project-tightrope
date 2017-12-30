@@ -46,6 +46,7 @@ public class HeightMapGenerator
 		return generator.heightMap;
 	}
 
+	// Gets the average value of the section surrounding the given coords.
 	private float getAverageOfHDSection (int x, int y)
 	{
 		int width = hdCoefficient, length = hdCoefficient;
@@ -73,12 +74,14 @@ public class HeightMapGenerator
 		return value / (width * length);
 	}
 
+	// Gets the random bump to be used in height generation.
 	private int GetRandomBump (int x0, int y0, int x1, int y1)
 	{
 		int range = randRange * (((x1 - x0) * (y1 - y0)) / (heightMap.GetLength (0) * heightMap.GetLength (1))) + 10;
 		return picker.Next (-range, range);
 	}
 
+	// Runs the diamond square step between the given vertices.
 	private void RunDiamondSquareStep (int x0, int y0, int x1, int y1)
 	{
 		//Debug.Log ("tl: (" + x0 + "," + y0 + "), br: (" + x1 + "," + y1 + ")");
@@ -155,6 +158,7 @@ public class HeightMapGenerator
 		RunDiamondSquareStep (x0, GetMidpoint (y0, y1), GetMidpoint (x0, x1), y1);
 	}
 
+	// Gets the midpoint value between the two given values.
 	private int GetMidpoint (int p1, int p2)
 	{
 		if (p1 < p2) {

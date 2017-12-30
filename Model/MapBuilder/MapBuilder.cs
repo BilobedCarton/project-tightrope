@@ -15,8 +15,6 @@ public class MapBuilder
 	}
 
 	private MapType type;
-	private bool isIsland;
-	private bool isOcean;
 
 	private int width;
 	private int length;
@@ -27,6 +25,7 @@ public class MapBuilder
 
 	private System.Random picker;
 
+	// Parses a string representing a MapType.
 	public static MapType ParseStringMapType (string mapType)
 	{
 		switch (mapType) {
@@ -46,9 +45,7 @@ public class MapBuilder
 
 	// Builds a new map of Cell objects.
 	public static Cell[,] BuildMap (
-		MapType type, 
-		bool isIsland, 
-		bool isOcean, 
+		MapType type,
 		int width, 
 		int length, 
 		List<Biome> potentialBiomes,
@@ -61,8 +58,6 @@ public class MapBuilder
 
 		MapBuilder builder = new MapBuilder {
 			type = type,
-			isIsland = isIsland,
-			isOcean = isOcean,
 			width = width,
 			length = length,
 			map = new Cell[width, length],
@@ -197,6 +192,7 @@ public class MapBuilder
 		return options [picker.Next (0, options.Count)];
 	}
 
+	// Generate a random alphanumeric string to use as a seed.
 	private static string GetNewRandomSeed ()
 	{
 		string characters = "abcdefghijklmnopqrstuvwxyz1234567890";

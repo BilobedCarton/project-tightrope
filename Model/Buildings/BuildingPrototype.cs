@@ -5,20 +5,30 @@ using UnityEngine;
 // Represents a type of building buildable by an IEntity.
 public class BuildingPrototype
 {
+	public string Id { get; private set; }
+
 	public string Name { get; private set; }
 
 	public Dictionary<string, int> ResourcesRequired { get; private set; }
 
 	public Dictionary<string, int> ChangeInResources { get; private set; }
 
+	private Resource requiredNaturalResource;
+
 	// Creates a new BuildingPrototype with the given values.
 	public static BuildingPrototype CreateBuildingPrototype (
-		string name, Dictionary<string, int> resourcesRequired, Dictionary<string, int> resourcesProduced)
+		string id, 
+		string name, 
+		Dictionary<string, int> resourcesRequired, 
+		Dictionary<string, int> resourcesProduced, 
+		Resource requiredNaturalResource)
 	{
 		BuildingPrototype proto = new BuildingPrototype {
+			Id = id,
 			Name = name,
 			ResourcesRequired = resourcesRequired,
-			ChangeInResources = resourcesProduced
+			ChangeInResources = resourcesProduced,
+			requiredNaturalResource = requiredNaturalResource
 		};
 		return proto;
 	}
@@ -26,6 +36,11 @@ public class BuildingPrototype
 	// Creates a new instance of this type of Building at the given Cell location to be owned by the given IEntity.
 	public BuildingInstance BuildInstance (Cell location, IEntity owner)
 	{
+		if (this.requiredNaturalResource != null
+		    && (location.NaturalResource.Id != this.requiredNaturalResource.Id) || location.NaturalResource == null) {
+			Debug.Log ("BuildingPrototype.BuildInstance(...) -- location does not have correct required natural resource.");
+			return null;
+		}
 		return new BuildingInstance (location, this, owner);
 	}
 }

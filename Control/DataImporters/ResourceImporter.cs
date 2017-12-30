@@ -5,17 +5,17 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.IO;
 
-// Imports all the biomes described in the Biomes.xml file.
+// Imports all the resources described in the Resources.xml file.
 public static class ResourceImporter
 {
 	// This is the action method of this importer.
 	public static List<Resource> Import ()
 	{
-		FileStream fs = new FileStream ("Assets/Resources/Data/Terrain/Resources.xml", FileMode.Open, FileAccess.Read);
+		FileStream fs = new FileStream ("Assets/Resources/Data/Resources.xml", FileMode.Open, FileAccess.Read);
 		XmlDocument doc = new XmlDocument ();
 		doc.Load (fs);
 
-		// Select all the Biome elements of the xml file.
+		// Select all the Resources elements of the xml file.
 		XmlNodeList xmlNodes = doc.GetElementsByTagName ("Resource");
 		List<Resource> resourceTypes = new List<Resource> ();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls other aspects of the UI.
 public class UserInterfaceController : MonoBehaviour
 {
 	public static UserInterfaceController Instance;
@@ -24,6 +25,7 @@ public class UserInterfaceController : MonoBehaviour
 		UpdateMainMenuEscPress ();
 	}
 
+	// This locates and activates the selection bracket sprite to be in the correct spot for the selected cell.
 	public void SetSelectionBracket ()
 	{
 		if (WorldController.Instance.SelectedCell != null) {
@@ -35,6 +37,7 @@ public class UserInterfaceController : MonoBehaviour
 		}
 	}
 
+	// Updates the visiblity of the ingame main menu depending on user input ("esc" key)
 	private void UpdateMainMenuEscPress ()
 	{
 		if (Input.GetButtonUp ("Escape") == true) {

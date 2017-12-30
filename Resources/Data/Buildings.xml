@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<BuildingType>
+	<Building id="0">
+		<name>House</name>
+		<resourcesRequired>
+			<resource id="2">10</resource>
+		</resourcesRequired>
+		<changeInResources></changeInResources>
+		<requiredNaturalResource></requiredNaturalResource>
+	</Building>
+	<Building id="1">
+		<name>Town Center</name>
+		<resourcesRequired>
+			<resource id="2">30</resource>
+		</resourcesRequired>
+		<changeInResources></changeInResources>
+		<requiredNaturalResource></requiredNaturalResource>
+	</Building>
+	<Building id="2">
+		<name>Iron Mine</name>
+		<resourcesRequired>
+			<resource id="2">5</resource>
+		</resourcesRequired>
+		<changeInResources>
+			<resource id="0">5</resource>
+		</changeInResources>
+		<requiredNaturalResource>
+			<resource id="0"></resource>
+		</requiredNaturalResource>
+	</Building>
+	<Building id="3">
+		<name>Farm</name>
+		<resourcesRequired>
+			<resource id="2">15</resource>
+		</resourcesRequired>
+		<changeInResources>
+			<resource id="1">10</resource>
+		</changeInResources>
+		<requiredNaturalResource>
+			<resource id="1"></resource>
+		</requiredNaturalResource>
+	</Building>
+</BuildingType>

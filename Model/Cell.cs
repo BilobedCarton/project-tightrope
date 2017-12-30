@@ -33,7 +33,7 @@ public class Cell
 	}
 
 	// Converts this cell to a string.
-	public string ToString ()
+	public override string ToString ()
 	{
 		return "Cell_" + X + "_" + Y;
 	}
@@ -44,6 +44,7 @@ public class Cell
 		this.Building = proto.BuildInstance (this, owner);
 	}
 
+	// Returns the relevant sprite for this cell object.
 	public Sprite GetCellSprite (WorldController.MapMode mapMode)
 	{
 		switch (mapMode) {
@@ -61,12 +62,14 @@ public class Cell
 		}
 	}
 
+	// Returns the color that reflects the height of this cell.
 	private Color GetHeightColor ()
 	{
 		int elevation = (int)Mathf.Floor (this.elevation);
 		return new Color (0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f, 0.5f + elevation * 0.01f);
 	}
 
+	// Returns the color that reflects the temperature of this cell.
 	private Color GetTemperatureColor ()
 	{
 		int temperature = (int)Mathf.Floor (this.temperature);

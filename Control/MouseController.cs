@@ -45,6 +45,7 @@ public class MouseController : MonoBehaviour
 		Camera.main.orthographicSize = Mathf.Clamp (Camera.main.orthographicSize, 3f, 50f);
 	}
 
+	// Updates the corresponding controllers for when the use selects a cell.
 	void UpdateSelection ()
 	{
 		if (EventSystem.current.IsPointerOverGameObject ()) {

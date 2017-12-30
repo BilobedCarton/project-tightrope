@@ -129,6 +129,7 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
+	// Creates a 1x1 pixel sprite with the given color.
 	private Sprite CreateCellSprite (Color c)
 	{
 		Texture2D t = new Texture2D (1, 1);
@@ -159,16 +160,19 @@ public class WorldController : MonoBehaviour
 		}
 	}
 
+	// Returns the imported sprite with the given name.
 	public Sprite GetImportedTerrainSprite (string name)
 	{
 		return importedTerrainSprites [name];
 	}
 
+	// Returns the generated sprite with the given color.
 	public Sprite GetCreatedTerrainSprite (Color c)
 	{
 		return createdTerrainSprites [c];
 	}
 
+	// Selects the cell at the given world coordinate.
 	public void SelectCellDataAtWorldCoord (Vector3 coord)
 	{
 		int x = Mathf.FloorToInt (coord.x + 0.5f);
@@ -177,6 +181,7 @@ public class WorldController : MonoBehaviour
 		this.SelectedCell = this.world.GetCellDataAt (x, y);
 	}
 
+	// Exits the game.
 	public void Exit ()
 	{
 		this.DestroyAllCellGameObjects ();

@@ -23,19 +23,18 @@ public class Biome
 		string name, 
 		float buildCostModifier, 
 		float baseMovementModifier, 
-		string potentialResourcesList, 
+		List<string> potentialResourcesList, 
 		float lowestElevation, 
 		float highestElevation,
 		int lowestTemperature,
 		int highestTemperature)
 	{
-		List<string> potentialResources = new List<string> (potentialResourcesList.Split (new char[] { '|' }));
 		return new Biome {
 			Id = id,
 			Name = name,
 			buildCostModifier = buildCostModifier,
 			baseMovementModifier = baseMovementModifier,
-			potentialResources = potentialResources,
+			potentialResources = potentialResourcesList,
 			lowestElevation = lowestElevation,
 			highestElevation = highestElevation,
 			lowestTemperature = lowestTemperature,
@@ -52,6 +51,7 @@ public class Biome
 		&& temperature <= highestTemperature;
 	}
 
+	// Picks a random resource id based upon this biomes list of potential resources.
 	public string PickRandomResource (System.Random picker)
 	{
 		if (picker.Next (0, 25) < 1) {

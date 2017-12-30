@@ -41,6 +41,7 @@ public class BuildingInstance
 		return this.proto.ChangeInResources [name];
 	}
 
+	// Gets the name of this type of building.
 	public string GetName ()
 	{
 		return proto.Name;

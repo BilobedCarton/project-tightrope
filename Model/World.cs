@@ -34,7 +34,7 @@ public class World
 		this.buildingPrototypes = new Dictionary<string, BuildingPrototype> ();
 		this.resources = new Dictionary<string, Resource> ();
 		foreach (Resource r in resources) {
-			this.resources.Add (r.Name, r);
+			this.resources.Add (r.Id, r);
 		}
 		this.resources.Add ("Empty", null); 
 
@@ -46,7 +46,7 @@ public class World
 		this.corporations = new List<Corporation> ();
 		this.nations = new List<Nation> ();
 
-		this.cells = MapBuilder.BuildMap (type, false, false, width, length, potentialBiomes, this.resources, seed);
+		this.cells = MapBuilder.BuildMap (type, width, length, potentialBiomes, this.resources, seed);
 	}
 
 	// Places an instance of the given building in the given location with the given owner.

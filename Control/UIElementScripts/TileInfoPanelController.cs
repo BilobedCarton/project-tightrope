@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Represents a controller for the tile info panel.
 public class TileInfoPanelController : MonoBehaviour
 {
+	// This is the current instance of the controller.
 	public static TileInfoPanelController Instance;
 
+	// This is the text element used to display the info.
 	public UnityEngine.UI.Text InfoText;
 
+	// Use this for initialization
 	void Start ()
 	{
 		if (Instance != null) {
@@ -34,6 +38,7 @@ public class TileInfoPanelController : MonoBehaviour
 		}
 	}
 
+	// Toggles the visibility and activity of this panel depending on if a cell is currently selected.
 	public void Toggle ()
 	{
 		if (WorldController.Instance.SelectedCell != null) {
