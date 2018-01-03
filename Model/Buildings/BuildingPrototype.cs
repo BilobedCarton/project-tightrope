@@ -13,7 +13,7 @@ public class BuildingPrototype
 
 	public Dictionary<string, int> ChangeInResources { get; private set; }
 
-	private Resource requiredNaturalResource;
+	private string requiredNaturalResource;
 
 	// Creates a new BuildingPrototype with the given values.
 	public static BuildingPrototype CreateBuildingPrototype (
@@ -21,7 +21,7 @@ public class BuildingPrototype
 		string name, 
 		Dictionary<string, int> resourcesRequired, 
 		Dictionary<string, int> resourcesProduced, 
-		Resource requiredNaturalResource)
+		string requiredNaturalResource)
 	{
 		BuildingPrototype proto = new BuildingPrototype {
 			Id = id,
@@ -36,8 +36,8 @@ public class BuildingPrototype
 	// Creates a new instance of this type of Building at the given Cell location to be owned by the given IEntity.
 	public BuildingInstance BuildInstance (Cell location, IEntity owner)
 	{
-		if (this.requiredNaturalResource != null
-		    && (location.NaturalResource.Id != this.requiredNaturalResource.Id) || location.NaturalResource == null) {
+		if (this.requiredNaturalResource != "none"
+		    && (location.NaturalResource.Id != this.requiredNaturalResource) || location.NaturalResource == null) {
 			Debug.Log ("BuildingPrototype.BuildInstance(...) -- location does not have correct required natural resource.");
 			return null;
 		}

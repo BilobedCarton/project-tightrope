@@ -62,7 +62,7 @@ public class WorldController : MonoBehaviour
 	public void GenerateWorld (string seed, MapBuilder.MapType type)
 	{
 		this.DestroyAllCellGameObjects ();
-		this.world = new World (65, 65, BiomeImporter.Import (), ResourceImporter.Import (), seed, type);
+		this.world = new World (65, 65, BiomeImporter.Import (), ResourceImporter.Import (), BuildingImporter.Import (), seed, type);
 		this.CreateAllCellGameObjects (this.world);
 		UpdateAllCellGameObjects ();
 	}

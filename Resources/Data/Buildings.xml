@@ -1,43 +1,39 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <BuildingType>
-	<Building id="0">
+	<Building id="house">
 		<name>House</name>
 		<resourcesRequired>
-			<resource id="2">10</resource>
+			<resource id="lumber">10</resource>
 		</resourcesRequired>
 		<changeInResources></changeInResources>
 		<requiredNaturalResource></requiredNaturalResource>
 	</Building>
-	<Building id="1">
+	<Building id="towncenter">
 		<name>Town Center</name>
 		<resourcesRequired>
-			<resource id="2">30</resource>
+			<resource id="lumber">30</resource>
 		</resourcesRequired>
 		<changeInResources></changeInResources>
 		<requiredNaturalResource></requiredNaturalResource>
 	</Building>
-	<Building id="2">
+	<Building id="ironmine">
 		<name>Iron Mine</name>
 		<resourcesRequired>
-			<resource id="2">5</resource>
+			<resource id="lumber">5</resource>
 		</resourcesRequired>
 		<changeInResources>
-			<resource id="0">5</resource>
+			<resource id="iron">5</resource>
 		</changeInResources>
-		<requiredNaturalResource>
-			<resource id="0"></resource>
-		</requiredNaturalResource>
+		<requiredNaturalResource>iron</requiredNaturalResource>
 	</Building>
-	<Building id="3">
+	<Building id="farm">
 		<name>Farm</name>
 		<resourcesRequired>
-			<resource id="2">15</resource>
+			<resource id="lumber">15</resource>
 		</resourcesRequired>
 		<changeInResources>
-			<resource id="1">10</resource>
+			<resource id="livestock">10</resource>
 		</changeInResources>
-		<requiredNaturalResource>
-			<resource id="1"></resource>
-		</requiredNaturalResource>
+		<requiredNaturalResource>livestock</requiredNaturalResource>
 	</Building>
 </BuildingType>

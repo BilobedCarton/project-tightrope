@@ -22,7 +22,8 @@ public class World
 	private List<Nation> nations;
 
 	// Creates a new World with the given width and length, as well as the given possible Biome types.
-	public World (int width, int length, List<Biome> potentialBiomes, List<Resource> resources, string seed, MapBuilder.MapType type)
+	public World (
+		int width, int length, List<Biome> potentialBiomes, List<Resource> resources, List<BuildingPrototype> buildings, string seed, MapBuilder.MapType type)
 	{
 		this.cells = new Cell[width, length];
 		this.buildings = new List<BuildingInstance> ();
@@ -32,6 +33,9 @@ public class World
 		this.Length = length;
 
 		this.buildingPrototypes = new Dictionary<string, BuildingPrototype> ();
+		foreach (BuildingPrototype bp in buildings) {
+			buildingPrototypes.Add (bp.Id, bp);
+		}
 		this.resources = new Dictionary<string, Resource> ();
 		foreach (Resource r in resources) {
 			this.resources.Add (r.Id, r);
